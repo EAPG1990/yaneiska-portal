@@ -1,0 +1,47 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #3d000c;
+  --color-primary-container: #5d101d;
+  --color-secondary: #775a19;
+  --color-secondary-container: #fed488;
+  --color-background: #fcf9f3;
+  --color-surface: #fcf9f3;
+  --color-surface-container: #f0eee8;
+  --color-on-surface: #1c1c18;
+  --color-on-surface-variant: #554243;
+  --color-gold: #C5A059;
+  --color-burgundy: #5D101D;
+  --color-cream: #F9F6F0;
+
+  --font-serif: "Noto Serif", serif;
+  --font-sans: "Manrope", sans-serif;
+
+  --shadow-silk: 0 10px 30px -10px rgba(93, 16, 29, 0.08);
+}
+
+@layer base {
+  body {
+    @apply bg-background text-on-surface font-sans;
+  }
+}
+
+@layer components {
+  .arabic-pattern-bg {
+    background-color: #fcf9f3;
+    background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuDhKmovN66Mp0wQqFtjCDmyjdb0dKKI3c4-TzxM3fi3_Yrgww03Lf7D2GMug1c4sowGEuY4frFvnNpM-fzeC9Gbywsg5VINeeRCFdjDItwXmYDHSoUm38DIuQxzIzVGVnjjcsGLhciu864xUdzGghP-o19OFDpFyIRlicTPAZ6pV-oufF8iee-cYJUf7pwGvDA6MQhREp1NezpJoNyYR8OxEOq93DvQbp1EFjLl9Fd0aJ4SdCsD9iXXhhF3gUKm7qYZ63uTUjpv9b5H);
+    background-blend-mode: overlay;
+  }
+
+  .golden-border-detail {
+    @apply border border-gold;
+  }
+
+  .input-elegant {
+    @apply bg-[#f6f3ed] border-none border-b-2 border-[#e5e2dc] transition-all duration-300 focus:outline-none focus:border-b-secondary shadow-none;
+  }
+
+  .silk-shadow {
+    @apply shadow-silk;
+  }
+}

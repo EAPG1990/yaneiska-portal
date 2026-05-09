@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;500;600;700&amp;family=Manrope:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-highest": "#e5e2dc",
+                    "primary-container": "#5d101d",
+                    "primary-fixed-dim": "#ffb2b6",
+                    "on-primary-fixed-variant": "#7e2933",
+                    "outline": "#887272",
+                    "primary": "#3d000c",
+                    "tertiary-fixed-dim": "#cdc5c0",
+                    "surface-bright": "#fcf9f3",
+                    "secondary-fixed-dim": "#e9c176",
+                    "on-secondary-container": "#785a1a",
+                    "on-tertiary-container": "#9c9591",
+                    "on-tertiary-fixed": "#1e1b18",
+                    "background": "#fcf9f3",
+                    "on-secondary-fixed-variant": "#5d4201",
+                    "surface-tint": "#9c4049",
+                    "secondary-container": "#fed488",
+                    "inverse-surface": "#31312d",
+                    "surface-container-low": "#f6f3ed",
+                    "inverse-on-surface": "#f3f0ea",
+                    "on-primary": "#ffffff",
+                    "tertiary": "#1d1917",
+                    "tertiary-fixed": "#e9e1dc",
+                    "surface": "#fcf9f3",
+                    "surface-container-high": "#ebe8e2",
+                    "surface-container": "#f0eee8",
+                    "on-error": "#ffffff",
+                    "on-error-container": "#93000a",
+                    "on-tertiary-fixed-variant": "#4b4642",
+                    "inverse-primary": "#ffb2b6",
+                    "outline-variant": "#dbc0c1",
+                    "surface-container-lowest": "#ffffff",
+                    "on-secondary": "#ffffff",
+                    "on-surface-variant": "#554243",
+                    "on-primary-fixed": "#40000d",
+                    "on-surface": "#1c1c18",
+                    "on-secondary-fixed": "#261900",
+                    "tertiary-container": "#322e2b",
+                    "on-background": "#1c1c18",
+                    "on-primary-container": "#e1767e",
+                    "secondary": "#775a19",
+                    "primary-fixed": "#ffdada",
+                    "surface-variant": "#e5e2dc",
+                    "error-container": "#ffdad6",
+                    "secondary-fixed": "#ffdea5",
+                    "surface-dim": "#dcdad4",
+                    "on-tertiary": "#ffffff",
+                    "error": "#ba1a1a"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "unit": "8px",
+                    "stack-sm": "8px",
+                    "section-gap": "48px",
+                    "gutter": "24px",
+                    "card-padding": "24px",
+                    "container-padding": "32px",
+                    "stack-md": "16px"
+            },
+            "fontFamily": {
+                    "h2": ["Noto Serif"],
+                    "body-lg": ["Manrope"],
+                    "h3": ["Noto Serif"],
+                    "body-md": ["Manrope"],
+                    "data-tabular": ["Manrope"],
+                    "h1": ["Noto Serif"],
+                    "label-caps": ["Manrope"]
+            },
+            "fontSize": {
+                    "h2": ["32px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "500"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400"}],
+                    "h3": ["24px", {"lineHeight": "1.4", "letterSpacing": "0", "fontWeight": "500"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400"}],
+                    "data-tabular": ["14px", {"lineHeight": "1.4", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                    "h1": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                    "label-caps": ["12px", {"lineHeight": "1.2", "letterSpacing": "0.08em", "fontWeight": "700"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #fcf9f3;
+            color: #1c1c18;
+        }
+    </style>
+</head>
+<body class="font-body-md text-body-md overflow-x-hidden">
+<!-- SideNavBar Shell -->
+<aside class="fixed left-0 top-0 h-full w-64 bg-primary dark:bg-primary-container flex flex-col py-container-padding z-50 shadow-md border-r border-outline">
+<div class="px-gutter mb-section-gap">
+<h2 class="font-h3 text-h3 font-semibold text-secondary-fixed-dim">Rhythmic Heritage</h2>
+<p class="font-label-caps text-label-caps text-secondary-fixed-dim/70 uppercase">Studio Management</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-stack-md text-secondary-fixed-dim/70 py-stack-md px-gutter hover:bg-primary-container/50 hover:text-secondary-fixed-dim transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-caps text-label-caps">Dashboard</span>
+</a>
+<!-- Active State for Alumnas -->
+<a class="flex items-center gap-stack-md bg-primary-container text-secondary-container border-l-4 border-secondary-fixed-dim py-stack-md px-gutter" href="#">
+<span class="material-symbols-outlined" data-icon="group" style="font-variation-settings: 'FILL' 1;">group</span>
+<span class="font-label-caps text-label-caps">Alumnas</span>
+</a>
+<a class="flex items-center gap-stack-md text-secondary-fixed-dim/70 py-stack-md px-gutter hover:bg-primary-container/50 hover:text-secondary-fixed-dim transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="meeting_room">meeting_room</span>
+<span class="font-label-caps text-label-caps">Alquiler de Salas</span>
+</a>
+<a class="flex items-center gap-stack-md text-secondary-fixed-dim/70 py-stack-md px-gutter hover:bg-primary-container/50 hover:text-secondary-fixed-dim transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="auto_stories">auto_stories</span>
+<span class="font-label-caps text-label-caps">Talleres</span>
+</a>
+<a class="flex items-center gap-stack-md text-secondary-fixed-dim/70 py-stack-md px-gutter hover:bg-primary-container/50 hover:text-secondary-fixed-dim transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="school">school</span>
+<span class="font-label-caps text-label-caps">Docentes</span>
+</a>
+</nav>
+<div class="px-gutter mt-auto pt-stack-md border-t border-secondary-fixed-dim/20">
+<a class="flex items-center gap-stack-md text-secondary-fixed-dim/70 py-stack-md hover:text-secondary-fixed-dim transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+<span class="font-label-caps text-label-caps">Support</span>
+</a>
+<a class="flex items-center gap-stack-md text-secondary-fixed-dim/70 py-stack-md hover:text-secondary-fixed-dim transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span class="font-label-caps text-label-caps">Logout</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-64 min-h-screen">
+<!-- TopNavBar Shell -->
+<header class="flex justify-between items-center w-full px-container-padding py-stack-sm bg-surface-bright dark:bg-surface-dim shadow-sm sticky top-0 z-40 h-20">
+<div class="flex items-center gap-stack-md">
+<div class="relative">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 material-symbols-outlined text-outline" data-icon="search">search</span>
+<input class="bg-surface-container-low border-b-2 border-outline/30 focus:border-secondary transition-all outline-none pl-10 pr-4 py-2 w-64 font-body-md" placeholder="Buscar alumna..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-gutter">
+<div class="flex items-center gap-stack-md">
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors" data-icon="notifications">notifications</button>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors" data-icon="settings">settings</button>
+</div>
+<div class="flex items-center gap-stack-sm border-l border-outline/20 pl-gutter">
+<div class="text-right">
+<p class="font-label-caps text-label-caps text-primary">Studio Manager</p>
+</div>
+<img alt="Studio Owner Profile" class="w-10 h-10 rounded-full border border-secondary" data-alt="A professional headshot of a female studio manager with a warm and welcoming smile. She is in a bright, minimalist office setting with soft, natural lighting that emphasizes a modern heritage brand aesthetic. The background is slightly out of focus, showing hint of gold and cream decorative elements, maintaining a luxury professional feel." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBxEqyLgBEyP2Z88vuu_wX69wmSLOAiKMCqzQLXqL5sUMwaThoqdSB5o4_3_ox9DCSLtb4dB2g_c6j0isLX-I_0Lr_dZhMvgcTdqKO8weJwtXdIwGS6jEFAX4ZuvBTOsVqQdSH5UydgoPlce8JM-wBgonItgw1Z7LPuHelZ-1FC58b9aViIeTPWoB0lUJFsMe9tRkYxzYNwHbor7v6li26NjQ1G6oUscBezwjGnB5rqb_AOUwTX0Mmer962OhjHteXyxWZPmE0_gZ7n"/>
+</div>
+</div>
+</header>
+<!-- Page Canvas -->
+<div class="p-container-padding max-w-[1440px] mx-auto">
+<!-- Page Header Actions -->
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-section-gap gap-gutter">
+<div>
+<h1 class="font-h1 text-h1 text-primary mb-1">Gestión de Alumnas</h1>
+<p class="text-on-surface-variant font-body-lg">Administra la base de datos de tu academia con precisión y elegancia.</p>
+</div>
+<button class="bg-primary text-on-primary px-gutter py-stack-md rounded shadow-sm hover:opacity-90 transition-all flex items-center gap-stack-sm">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+<span class="font-label-caps text-label-caps uppercase">Añadir Alumna</span>
+</button>
+</div>
+<!-- Dashboard Stats / Bento Grid Lite -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter mb-section-gap">
+<div class="bg-surface-container-lowest border border-secondary-fixed-dim/30 p-card-padding rounded shadow-sm">
+<p class="font-label-caps text-label-caps text-on-surface-variant mb-2">TOTAL ALUMNAS</p>
+<h3 class="font-h2 text-h2 text-primary">124</h3>
+<div class="mt-4 flex items-center gap-2 text-green-700 text-sm">
+<span class="material-symbols-outlined text-sm" data-icon="trending_up">trending_up</span>
+<span>+12 este mes</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest border border-secondary-fixed-dim/30 p-card-padding rounded shadow-sm">
+<p class="font-label-caps text-label-caps text-on-surface-variant mb-2">ASISTENCIA PROMEDIO</p>
+<h3 class="font-h2 text-h2 text-primary">92%</h3>
+<div class="mt-4 flex items-center gap-2 text-primary/70 text-sm">
+<span class="material-symbols-outlined text-sm" data-icon="calendar_today">calendar_today</span>
+<span>Semana actual</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest border border-secondary-fixed-dim/30 p-card-padding rounded shadow-sm">
+<p class="font-label-caps text-label-caps text-on-surface-variant mb-2">PENDIENTES DE PAGO</p>
+<h3 class="font-h2 text-h2 text-error">8</h3>
+<div class="mt-4 flex items-center gap-2 text-error/70 text-sm">
+<span class="material-symbols-outlined text-sm" data-icon="warning">warning</span>
+<span>Requiere acción</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest border border-secondary-fixed-dim/30 p-card-padding rounded shadow-sm">
+<p class="font-label-caps text-label-caps text-on-surface-variant mb-2">NIVEL AVANZADO</p>
+<h3 class="font-h2 text-h2 text-secondary">34</h3>
+<div class="mt-4 flex items-center gap-2 text-secondary/70 text-sm">
+<span class="material-symbols-outlined text-sm" data-icon="star">star</span>
+<span>Crecimiento sostenido</span>
+</div>
+</div>
+</div>
+<!-- Filters Section -->
+<div class="flex flex-wrap items-center gap-stack-md mb-gutter">
+<span class="font-label-caps text-label-caps text-on-surface-variant mr-2">FILTRAR POR NIVEL:</span>
+<button class="px-gutter py-1.5 rounded-full border border-secondary bg-secondary-container text-on-secondary-container font-label-caps text-label-caps">TODAS</button>
+<button class="px-gutter py-1.5 rounded-full border border-secondary/30 text-on-surface-variant hover:border-secondary transition-colors font-label-caps text-label-caps">PRINCIPIANTE</button>
+<button class="px-gutter py-1.5 rounded-full border border-secondary/30 text-on-surface-variant hover:border-secondary transition-colors font-label-caps text-label-caps">INTERMEDIO</button>
+<button class="px-gutter py-1.5 rounded-full border border-secondary/30 text-on-surface-variant hover:border-secondary transition-colors font-label-caps text-label-caps">AVANZADO</button>
+<button class="px-gutter py-1.5 rounded-full border border-secondary/30 text-on-surface-variant hover:border-secondary transition-colors font-label-caps text-label-caps">PROFESIONAL</button>
+</div>
+<!-- Professional Data Table -->
+<div class="bg-surface-container-lowest rounded shadow-md overflow-hidden border border-secondary-fixed-dim/20">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low border-b border-outline/10">
+<th class="px-gutter py-stack-md font-label-caps text-label-caps text-tertiary">NOMBRE</th>
+<th class="px-gutter py-stack-md font-label-caps text-label-caps text-tertiary">NIVEL</th>
+<th class="px-gutter py-stack-md font-label-caps text-label-caps text-tertiary">CURSO ACTUAL</th>
+<th class="px-gutter py-stack-md font-label-caps text-label-caps text-tertiary">ESTADO DE PAGO</th>
+<th class="px-gutter py-stack-md font-label-caps text-label-caps text-tertiary text-right">ACCIONES</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline/5">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-gutter py-gutter">
+<div class="flex items-center gap-stack-md">
+<div class="w-10 h-10 rounded bg-primary-fixed flex items-center justify-center font-h3 text-primary">LA</div>
+<div>
+<p class="font-h3 text-body-md font-medium text-on-surface">Lucía Al-Mansour</p>
+<p class="text-xs text-on-surface-variant">ID: #4582</p>
+</div>
+</div>
+</td>
+<td class="px-gutter py-gutter">
+<span class="inline-flex items-center gap-1 border border-secondary-fixed-dim px-2 py-1 rounded text-xs font-label-caps text-secondary uppercase">
+                                    Avanzado
+                                </span>
+</td>
+<td class="px-gutter py-gutter font-body-md text-on-surface-variant">Técnica de Velo y Crótalos</td>
+<td class="px-gutter py-gutter">
+<span class="bg-green-100 text-green-800 px-stack-md py-1 rounded-full text-xs font-label-caps">AL DÍA</span>
+</td>
+<td class="px-gutter py-gutter text-right">
+<button class="text-primary font-label-caps text-label-caps hover:underline">VER PERFIL</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-container-low transition-colors group bg-surface-container-low/30">
+<td class="px-gutter py-gutter">
+<div class="flex items-center gap-stack-md">
+<div class="w-10 h-10 rounded bg-primary-container/20 flex items-center justify-center font-h3 text-primary">MB</div>
+<div>
+<p class="font-h3 text-body-md font-medium text-on-surface">Marta Benítez</p>
+<p class="text-xs text-on-surface-variant">ID: #4590</p>
+</div>
+</div>
+</td>
+<td class="px-gutter py-gutter">
+<span class="inline-flex items-center gap-1 border border-outline/30 px-2 py-1 rounded text-xs font-label-caps text-on-surface-variant uppercase">
+                                    Principiante
+                                </span>
+</td>
+<td class="px-gutter py-gutter font-body-md text-on-surface-variant">Iniciación a la Danza Árabe</td>
+<td class="px-gutter py-gutter">
+<span class="bg-error-container text-on-error-container px-stack-md py-1 rounded-full text-xs font-label-caps">PENDIENTE</span>
+</td>
+<td class="px-gutter py-gutter text-right">
+<button class="text-primary font-label-caps text-label-caps hover:underline">VER PERFIL</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-gutter py-gutter">
+<div class="flex items-center gap-stack-md">
+<div class="w-10 h-10 rounded bg-secondary-container/30 flex items-center justify-center font-h3 text-secondary">EF</div>
+<div>
+<p class="font-h3 text-body-md font-medium text-on-surface">Elena Fernández</p>
+<p class="text-xs text-on-surface-variant">ID: #4601</p>
+</div>
+</div>
+</td>
+<td class="px-gutter py-gutter">
+<span class="inline-flex items-center gap-1 border border-secondary-fixed-dim/60 px-2 py-1 rounded text-xs font-label-caps text-on-secondary-container uppercase">
+                                    Intermedio
+                                </span>
+</td>
+<td class="px-gutter py-gutter font-body-md text-on-surface-variant">Danza Estilizada I</td>
+<td class="px-gutter py-gutter">
+<span class="bg-green-100 text-green-800 px-stack-md py-1 rounded-full text-xs font-label-caps">AL DÍA</span>
+</td>
+<td class="px-gutter py-gutter text-right">
+<button class="text-primary font-label-caps text-label-caps hover:underline">VER PERFIL</button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-surface-container-low transition-colors group bg-surface-container-low/30">
+<td class="px-gutter py-gutter">
+<div class="flex items-center gap-stack-md">
+<div class="w-10 h-10 rounded bg-tertiary-fixed-dim/40 flex items-center justify-center font-h3 text-tertiary">SR</div>
+<div>
+<p class="font-h3 text-body-md font-medium text-on-surface">Sofía Ruiz</p>
+<p class="text-xs text-on-surface-variant">ID: #4615</p>
+</div>
+</div>
+</td>
+<td class="px-gutter py-gutter">
+<span class="inline-flex items-center gap-1 border border-primary px-2 py-1 rounded text-xs font-label-caps text-primary uppercase">
+                                    Profesional
+                                </span>
+</td>
+<td class="px-gutter py-gutter font-body-md text-on-surface-variant">Formación Docente 2024</td>
+<td class="px-gutter py-gutter">
+<span class="bg-green-100 text-green-800 px-stack-md py-1 rounded-full text-xs font-label-caps">AL DÍA</span>
+</td>
+<td class="px-gutter py-gutter text-right">
+<button class="text-primary font-label-caps text-label-caps hover:underline">VER PERFIL</button>
+</td>
+</tr>
+</tbody>
+</table>
+<!-- Table Pagination -->
+<div class="px-gutter py-stack-md bg-surface-container-low border-t border-outline/10 flex items-center justify-between">
+<p class="text-xs font-label-caps text-on-surface-variant">MOSTRANDO 4 DE 124 ALUMNAS</p>
+<div class="flex items-center gap-stack-md">
+<button class="p-1 hover:bg-outline/10 rounded-full transition-colors material-symbols-outlined text-on-surface-variant" data-icon="chevron_left">chevron_left</button>
+<span class="font-label-caps text-label-caps text-primary">1</span>
+<button class="p-1 hover:bg-outline/10 rounded-full transition-colors material-symbols-outlined text-on-surface-variant" data-icon="chevron_right">chevron_right</button>
+</div>
+</div>
+</div>
+<!-- Contextual Illustration/Ad Section -->
+<div class="mt-section-gap relative rounded-xl overflow-hidden h-64 shadow-lg group">
+<img alt="Studio Ambience" class="w-full h-full object-cover grayscale-[20%] group-hover:scale-105 transition-transform duration-700" data-alt="A wide-angle, cinematic view of a premium Arabic dance studio featuring polished dark wood floors, warm cream-colored walls with golden geometric fretwork, and soft daylight filtering through sheer silk curtains. The atmosphere is serene and high-end, with large mirrors reflecting the elegant architectural details. The lighting is low-contrast and soft, reinforcing a modern heritage brand aesthetic of discipline and luxury." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDbxjUF1fWDBOahve_ooWq7ptHQEGYILiE9-xfCTI8K8_1uffDPbxknYXzmildveaviMNKsywG5lrqzQ3ZfJLDTv_9kbqsVpIBN2s1c3oKMvAHBhKjgSP3vBfp9Cs5QX10OvagDsOjpfhz--z71LRuEfKIDy73hBe2KD7bn5Uy0Ty8UOS5CCEKVzBqEzYFbs0A3Hkae3GjUcwiYr9luBxeXl-ELfT6b5PBr70DrUlJkR4qZq5PommHv9T3a7zuXaj7dJglMrzWcS3R5"/>
+<div class="absolute inset-0 bg-gradient-to-r from-primary/80 to-transparent flex flex-col justify-center px-container-padding text-on-primary">
+<p class="font-label-caps text-label-caps text-secondary-fixed-dim uppercase tracking-widest mb-2">Herramientas Avanzadas</p>
+<h2 class="font-h2 text-h2 mb-4 max-w-md">Lleva el seguimiento del progreso de tus grupos con analíticas.</h2>
+<button class="bg-secondary text-on-secondary px-gutter py-stack-sm rounded w-fit font-label-caps text-label-caps hover:bg-secondary-fixed-dim hover:text-on-secondary-fixed transition-colors">DESCUBRIR MÓDULO</button>
+</div>
+</div>
+</div>
+</main>
+</body></html>

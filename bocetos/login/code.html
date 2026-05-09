@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Login | Rhythmic Heritage Studio</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;500;600;700&amp;family=Manrope:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-container-highest": "#e5e2dc",
+                      "primary-container": "#5d101d",
+                      "primary-fixed-dim": "#ffb2b6",
+                      "on-primary-fixed-variant": "#7e2933",
+                      "outline": "#887272",
+                      "primary": "#3d000c",
+                      "tertiary-fixed-dim": "#cdc5c0",
+                      "surface-bright": "#fcf9f3",
+                      "secondary-fixed-dim": "#e9c176",
+                      "on-secondary-container": "#785a1a",
+                      "on-tertiary-container": "#9c9591",
+                      "on-tertiary-fixed": "#1e1b18",
+                      "background": "#fcf9f3",
+                      "on-secondary-fixed-variant": "#5d4201",
+                      "surface-tint": "#9c4049",
+                      "secondary-container": "#fed488",
+                      "inverse-surface": "#31312d",
+                      "surface-container-low": "#f6f3ed",
+                      "inverse-on-surface": "#f3f0ea",
+                      "on-primary": "#ffffff",
+                      "tertiary": "#1d1917",
+                      "tertiary-fixed": "#e9e1dc",
+                      "surface": "#fcf9f3",
+                      "surface-container-high": "#ebe8e2",
+                      "surface-container": "#f0eee8",
+                      "on-error": "#ffffff",
+                      "on-error-container": "#93000a",
+                      "on-tertiary-fixed-variant": "#4b4642",
+                      "inverse-primary": "#ffb2b6",
+                      "outline-variant": "#dbc0c1",
+                      "surface-container-lowest": "#ffffff",
+                      "on-secondary": "#ffffff",
+                      "on-surface-variant": "#554243",
+                      "on-primary-fixed": "#40000d",
+                      "on-surface": "#1c1c18",
+                      "on-secondary-fixed": "#261900",
+                      "tertiary-container": "#322e2b",
+                      "on-background": "#1c1c18",
+                      "on-primary-container": "#e1767e",
+                      "secondary": "#775a19",
+                      "primary-fixed": "#ffdada",
+                      "surface-variant": "#e5e2dc",
+                      "error-container": "#ffdad6",
+                      "secondary-fixed": "#ffdea5",
+                      "surface-dim": "#dcdad4",
+                      "on-tertiary": "#ffffff",
+                      "error": "#ba1a1a"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "unit": "8px",
+                      "stack-sm": "8px",
+                      "section-gap": "48px",
+                      "gutter": "24px",
+                      "card-padding": "24px",
+                      "container-padding": "32px",
+                      "stack-md": "16px"
+              },
+              "fontFamily": {
+                      "h2": ["Noto Serif"],
+                      "body-lg": ["Manrope"],
+                      "h3": ["Noto Serif"],
+                      "body-md": ["Manrope"],
+                      "data-tabular": ["Manrope"],
+                      "h1": ["Noto Serif"],
+                      "label-caps": ["Manrope"]
+              },
+              "fontSize": {
+                      "h2": ["32px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "500"}],
+                      "body-lg": ["18px", {"lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400"}],
+                      "h3": ["24px", {"lineHeight": "1.4", "letterSpacing": "0", "fontWeight": "500"}],
+                      "body-md": ["16px", {"lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400"}],
+                      "data-tabular": ["14px", {"lineHeight": "1.4", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                      "h1": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                      "label-caps": ["12px", {"lineHeight": "1.2", "letterSpacing": "0.08em", "fontWeight": "700"}]
+              }
+            },
+          },
+        }
+    </script>
+<style>.arabic-pattern-bg {
+    background-color: #fcf9f3;
+    background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuDhKmovN66Mp0wQqFtjCDmyjdb0dKKI3c4-TzxM3fi3_Yrgww03Lf7D2GMug1c4sowGEuY4frFvnNpM-fzeC9Gbywsg5VINeeRCFdjDItwXmYDHSoUm38DIuQxzIzVGVnjjcsGLhciu864xUdzGghP-o19OFDpFyIRlicTPAZ6pV-oufF8iee-cYJUf7pwGvDA6MQhREp1NezpJoNyYR8OxEOq93DvQbp1EFjLl9Fd0aJ4SdCsD9iXXhhF3gUKm7qYZ63uTUjpv9b5H);
+    background-blend-mode: overlay
+    }
+.golden-border-detail {
+    border: 1px solid #C5A059
+    }
+.input-elegant {
+    background-color: #f6f3ed;
+    border: none;
+    border-bottom: 2px solid #e5e2dc;
+    transition: border-color 0.3s ease
+    }
+.input-elegant:focus {
+    outline: none;
+    border-bottom-color: #775a19;
+    box-shadow: none
+    }
+.silk-shadow {
+    box-shadow: 0 10px 30px -10px rgba(93, 16, 29, 0.08)
+    }</style>
+</head>
+<body class="bg-surface-bright font-body-md text-on-surface flex items-center justify-center min-h-screen arabic-pattern-bg">
+<!-- Login Container -->
+<main class="w-full max-w-[440px] px-container-padding py-section-gap relative">
+<!-- Branding Header -->
+<div class="text-center mb-section-gap">
+<div class="flex justify-center mb-stack-md">
+<div class="w-20 h-20 rounded-full border-2 border-secondary-fixed-dim flex items-center justify-center bg-primary-container shadow-md">
+<span class="material-symbols-outlined text-[40px] text-secondary-fixed-dim" data-icon="auto_stories">auto_stories</span>
+</div>
+</div>
+<h1 class="font-h1 text-h1 text-primary mb-unit">Rhythmic Heritage</h1>
+<p class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-widest">Studio Management Portal</p>
+</div>
+<!-- Central Form Card -->
+<section class="bg-surface-container-lowest rounded-xl p-card-padding golden-border-detail silk-border silk-shadow relative overflow-hidden">
+<!-- Decorative Accent -->
+<div class="absolute top-0 left-0 w-full h-1 bg-primary-container"></div>
+<form action="#" class="space-y-gutter" method="POST">
+<div class="space-y-stack-sm">
+<label class="font-label-caps text-label-caps text-secondary" for="username">Identificación de Usuario</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-0 top-1/2 -translate-y-1/2 text-on-surface-variant text-[20px]" data-icon="person">person</span>
+<input class="input-elegant w-full pl-8 py-unit font-body-md text-on-surface placeholder-on-surface-variant/50" id="username" name="username" placeholder="nombre@academia.com" required="" type="text"/>
+</div>
+</div>
+<div class="space-y-stack-sm">
+<label class="font-label-caps text-label-caps text-secondary" for="password">Contraseña</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-0 top-1/2 -translate-y-1/2 text-on-surface-variant text-[20px]" data-icon="lock">lock</span>
+<input class="input-elegant w-full pl-8 py-unit font-body-md text-on-surface placeholder-on-surface-variant/50" id="password" name="password" placeholder="••••••••" required="" type="password"/>
+</div>
+</div>
+<div class="flex items-center justify-between pt-stack-sm">
+<label class="flex items-center gap-stack-sm cursor-pointer group">
+<input class="w-4 h-4 rounded border-outline text-primary-container focus:ring-secondary" type="checkbox"/>
+<span class="font-body-md text-[14px] text-on-surface-variant group-hover:text-primary transition-colors">Recordarme</span>
+</label>
+<a class="font-body-md text-[14px] text-primary-container hover:text-primary underline-offset-4 hover:underline transition-colors" href="#">¿Olvidó su contraseña?</a>
+</div>
+<button class="w-full bg-primary-container text-secondary-fixed-dim font-label-caps text-label-caps py-stack-md rounded hover:bg-primary transition-all duration-300 shadow-md flex items-center justify-center gap-stack-md group" type="submit">
+<span>Acceder al Studio</span>
+<span class="material-symbols-outlined text-[18px] group-hover:translate-x-1 transition-transform" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</form>
+<!-- Bottom Note -->
+<div class="mt-section-gap pt-gutter border-t border-surface-container-highest text-center">
+<p class="text-body-md text-[14px] text-on-surface-variant">
+                    ¿Nuevo docente? 
+                    <a class="text-secondary font-bold hover:text-primary transition-colors" href="#">Solicitar Registro</a>
+</p>
+</div>
+</section>
+<!-- Footer Visual Decor -->
+<div class="mt-gutter grid grid-cols-3 gap-unit opacity-60">
+<div class="h-[1px] bg-gradient-to-r from-transparent via-secondary to-transparent"></div>
+<div class="h-[1px] bg-gradient-to-r from-transparent via-secondary to-transparent"></div>
+<div class="h-[1px] bg-gradient-to-r from-transparent via-secondary to-transparent"></div>
+</div>
+<footer class="mt-stack-md text-center">
+<p class="font-label-caps text-[10px] text-on-surface-variant tracking-[0.2em]">PRECISIÓN • DISCIPLINA • ARTE</p>
+</footer>
+</main>
+<!-- Background Atmospheric Images (Asymmetric Layout) -->
+<div class="fixed top-0 left-0 w-full h-full -z-10 pointer-events-none overflow-hidden select-none">
+<!-- Top Left Decorative image -->
+<div class="absolute -top-24 -left-24 w-96 h-96 opacity-20 transform rotate-12">
+<img class="w-full h-full object-cover rounded-full filter grayscale sepia brightness-50" data-alt="A macro shot of a luxurious deep burgundy silk fabric with intricate gold embroidery and traditional Middle Eastern motifs. The lighting is soft and atmospheric, highlighting the texture of the threads and the subtle sheen of the silk, evoking a sense of heritage and premium craftsmanship." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAAGJHML9zNIVsvNTauquZ6P5PdFh5poKV1TlLWdsnexEISTUP3UNleqgIrEGupcKN-R8FLyV2MJ1ZPnx9gfTtttQ_uHGWduD0VJ68bJNkhN81kaoPV-mVckZ99b-95sw6RN6CM4LtoYlH1rLfVpvkz0vT4-DrvW0lfL003o7iRY2MH58kOHEZ8zBLHNgOTu5P1se56rUqY-RoJliUheQ6dhsnBVBXruIhQx4wtut5hrjCrqv58JCtXSKTblzs1Ulp8Uc1qWKMzVKOb"/>
+</div>
+<!-- Bottom Right Decorative image -->
+<div class="absolute -bottom-24 -right-24 w-[500px] h-[500px] opacity-10">
+<img class="w-full h-full object-cover rounded-full" data-alt="An elegant perspective of an upscale dance studio interior featuring polished light-wood floors and large mirrors. The scene is bathed in the golden glow of a sunset filtering through tall arched windows, creating long shadows and a serene, professional atmosphere. The color palette is dominated by warm creams, golds, and deep wood tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCvmOsmYzkmwNU4Z6IunMl2qrXPNwwfUa9Jje7oua2G8IllFDyKkWs2fvt2aVSesieKxdCIG1vTQ85hYDSPHNLaEVajyDP4hEMjMMkQF0h1HraHGcJeluBaSD4KGdxQW8zu7jh54m1eriSR2h3WiU04fZ-dw8ALGttPr8ju1nrckrcjIQGYMYXk1s25HCO7Qk6KhUDNsqplMmPJpI-twMF_2m498UVo8Km5LLkN-grdu6YeALbEusDwbj7fYe3FYWigLXg8uvDPh8X1"/>
+</div>
+</div>
+</body></html>

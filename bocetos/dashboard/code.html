@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;500;600;700&amp;family=Manrope:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-highest": "#e5e2dc",
+                    "primary-container": "#5d101d",
+                    "primary-fixed-dim": "#ffb2b6",
+                    "on-primary-fixed-variant": "#7e2933",
+                    "outline": "#887272",
+                    "primary": "#3d000c",
+                    "tertiary-fixed-dim": "#cdc5c0",
+                    "surface-bright": "#fcf9f3",
+                    "secondary-fixed-dim": "#e9c176",
+                    "on-secondary-container": "#785a1a",
+                    "on-tertiary-container": "#9c9591",
+                    "on-tertiary-fixed": "#1e1b18",
+                    "background": "#fcf9f3",
+                    "on-secondary-fixed-variant": "#5d4201",
+                    "surface-tint": "#9c4049",
+                    "secondary-container": "#fed488",
+                    "inverse-surface": "#31312d",
+                    "surface-container-low": "#f6f3ed",
+                    "inverse-on-surface": "#f3f0ea",
+                    "on-primary": "#ffffff",
+                    "tertiary": "#1d1917",
+                    "tertiary-fixed": "#e9e1dc",
+                    "surface": "#fcf9f3",
+                    "surface-container-high": "#ebe8e2",
+                    "surface-container": "#f0eee8",
+                    "on-error": "#ffffff",
+                    "on-error-container": "#93000a",
+                    "on-tertiary-fixed-variant": "#4b4642",
+                    "inverse-primary": "#ffb2b6",
+                    "outline-variant": "#dbc0c1",
+                    "surface-container-lowest": "#ffffff",
+                    "on-secondary": "#ffffff",
+                    "on-surface-variant": "#554243",
+                    "on-primary-fixed": "#40000d",
+                    "on-surface": "#1c1c18",
+                    "on-secondary-fixed": "#261900",
+                    "tertiary-container": "#322e2b",
+                    "on-background": "#1c1c18",
+                    "on-primary-container": "#e1767e",
+                    "secondary": "#775a19",
+                    "primary-fixed": "#ffdada",
+                    "surface-variant": "#e5e2dc",
+                    "error-container": "#ffdad6",
+                    "secondary-fixed": "#ffdea5",
+                    "surface-dim": "#dcdad4",
+                    "on-tertiary": "#ffffff",
+                    "error": "#ba1a1a"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "unit": "8px",
+                    "stack-sm": "8px",
+                    "section-gap": "48px",
+                    "gutter": "24px",
+                    "card-padding": "24px",
+                    "container-padding": "32px",
+                    "stack-md": "16px"
+            },
+            "fontFamily": {
+                    "h2": ["Noto Serif"],
+                    "body-lg": ["Manrope"],
+                    "h3": ["Noto Serif"],
+                    "body-md": ["Manrope"],
+                    "data-tabular": ["Manrope"],
+                    "h1": ["Noto Serif"],
+                    "label-caps": ["Manrope"]
+            },
+            "fontSize": {
+                    "h2": ["32px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "500"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400"}],
+                    "h3": ["24px", {"lineHeight": "1.4", "letterSpacing": "0", "fontWeight": "500"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400"}],
+                    "data-tabular": ["14px", {"lineHeight": "1.4", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                    "h1": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                    "label-caps": ["12px", {"lineHeight": "1.2", "letterSpacing": "0.08em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #fcf9f3;
+            color: #1c1c18;
+        }
+        .silk-shadow {
+            box-shadow: 0 10px 30px -5px rgba(93, 16, 29, 0.08);
+        }
+    </style>
+</head>
+<body class="font-body-md overflow-x-hidden">
+<!-- SideNavBar Shell -->
+<aside class="flex flex-col h-full py-container-padding w-64 z-50 fixed left-0 top-0 bg-primary dark:bg-primary-container border-r border-outline shadow-md">
+<div class="px-gutter mb-section-gap">
+<h1 class="font-h3 text-h3 font-semibold text-secondary-fixed-dim">Rhythmic Heritage</h1>
+<p class="font-label-caps text-label-caps text-secondary-fixed-dim/60 mt-1">Studio Management</p>
+</div>
+<nav class="flex-grow space-y-1">
+<!-- Active Tab: Dashboard -->
+<a class="flex items-center gap-stack-md bg-primary-container text-secondary-container border-l-4 border-secondary-fixed-dim py-stack-md px-gutter transition-all duration-200 Active: translate-x-1" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-caps text-label-caps">Dashboard</span>
+</a>
+<a class="flex items-center gap-stack-md text-secondary-fixed-dim/70 py-stack-md px-gutter hover:bg-primary-container/50 hover:text-secondary-fixed-dim transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span class="font-label-caps text-label-caps">Alumnas</span>
+</a>
+<a class="flex items-center gap-stack-md text-secondary-fixed-dim/70 py-stack-md px-gutter hover:bg-primary-container/50 hover:text-secondary-fixed-dim transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="meeting_room">meeting_room</span>
+<span class="font-label-caps text-label-caps">Alquiler de Salas</span>
+</a>
+<a class="flex items-center gap-stack-md text-secondary-fixed-dim/70 py-stack-md px-gutter hover:bg-primary-container/50 hover:text-secondary-fixed-dim transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="auto_stories">auto_stories</span>
+<span class="font-label-caps text-label-caps">Talleres</span>
+</a>
+<a class="flex items-center gap-stack-md text-secondary-fixed-dim/70 py-stack-md px-gutter hover:bg-primary-container/50 hover:text-secondary-fixed-dim transition-all duration-300" href="#">
+<span class="material-symbols-outlined" data-icon="school">school</span>
+<span class="font-label-caps text-label-caps">Docentes</span>
+</a>
+</nav>
+<div class="px-gutter mt-auto pt-section-gap space-y-4">
+<button class="w-full bg-secondary-container text-on-secondary-container font-label-caps text-label-caps py-stack-md rounded-lg flex items-center justify-center gap-2 shadow-sm hover:opacity-90 transition-all">
+<span class="material-symbols-outlined text-[18px]" data-icon="add">add</span>
+                New Registration
+            </button>
+<div class="space-y-1">
+<a class="flex items-center gap-stack-md text-secondary-fixed-dim/70 py-stack-sm hover:text-secondary-fixed-dim transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+<span class="font-label-caps text-label-caps text-[10px]">Support</span>
+</a>
+<a class="flex items-center gap-stack-md text-secondary-fixed-dim/70 py-stack-sm hover:text-secondary-fixed-dim transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span class="font-label-caps text-label-caps text-[10px]">Logout</span>
+</a>
+</div>
+</div>
+</aside>
+<!-- TopNavBar Shell -->
+<header class="flex justify-between items-center w-full px-container-padding py-stack-sm ml-64 bg-surface-bright dark:bg-surface-dim shadow-sm fixed top-0 right-0 z-40 left-0" style="width: calc(100% - 16rem);">
+<div class="flex items-center gap-gutter">
+<h2 class="font-h2 text-h2 font-medium text-primary dark:text-primary-fixed-dim">Modern Heritage Studio</h2>
+<div class="relative ml-gutter">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant" data-icon="search">search</span>
+<input class="pl-10 pr-4 py-2 bg-surface-container-low border-b-2 border-outline/20 focus:border-secondary-fixed-dim outline-none font-body-md text-sm w-64 transition-all" placeholder="Buscar alumnas, salas..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-stack-md">
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+<div class="flex items-center gap-stack-sm ml-stack-md border-l border-outline/20 pl-stack-md">
+<div class="text-right">
+<p class="font-label-caps text-[10px] text-on-surface-variant">BIENVENIDA</p>
+<p class="font-body-md text-sm font-bold text-primary">Studio Owner</p>
+</div>
+<img alt="Studio Owner Profile" class="w-10 h-10 rounded-full border border-secondary-fixed-dim" data-alt="A professional and warm portrait of a studio owner in a high-end dance environment. The lighting is soft and cinematic, highlighting her features against a blurred background of a polished wooden dance floor and cream-colored curtains. She has a serene, welcoming expression, fitting the premium modern heritage brand aesthetic. The overall color palette consists of deep burgundy accents and warm golden lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB3VwQDT07utZABp--HmojeOB_nyI479OfSd0hLzSDDm5UGa21ZHiJ2axQmH6peNI1QkQxINRNhh2Jz4a3zuVMhB5qT1DHHtTM9vqzNUG91Q6_NClMZEKsb3rzSsBBThvOdPayXsUcISsGs9L499u-fdA30-fSxmiWH9jtniDetmlZyUF9zi45heviSkFrnTkEbJmzu5K3ymx7xomZp07xV4B29OgZE2sk4VTIwlE7B7sr9T0fucIKdVb5OrUu00akit-1d4nN-aW6d"/>
+</div>
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="ml-64 mt-[80px] p-container-padding">
+<div class="max-w-[1440px] mx-auto">
+<!-- Header Section -->
+<div class="mb-section-gap">
+<h3 class="font-h1 text-h1 text-primary">Panel de Control</h3>
+<p class="font-body-lg text-on-surface-variant mt-2">Visión general del rendimiento de la academia hoy.</p>
+</div>
+<!-- Bento Grid Stats -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter mb-section-gap">
+<!-- Stat Card 1 -->
+<div class="bg-surface-container-lowest p-card-padding border border-secondary-fixed-dim/30 rounded-lg silk-shadow relative overflow-hidden">
+<div class="absolute top-0 left-0 w-1 h-full bg-primary"></div>
+<p class="font-label-caps text-label-caps text-on-surface-variant mb-2">ALUMNAS ACTIVAS</p>
+<div class="flex items-end gap-2">
+<span class="font-h1 text-h1 text-primary">150</span>
+<span class="font-body-md text-secondary mb-2 flex items-center text-sm">
+<span class="material-symbols-outlined text-[16px] mr-1" data-icon="trending_up">trending_up</span>
+                            +12% este mes
+                        </span>
+</div>
+<div class="mt-4 flex -space-x-2">
+<img alt="user" class="w-8 h-8 rounded-full border-2 border-white" data-alt="Close-up portrait of a diverse young dancer with a joyful expression, wearing elegant dance attire. The lighting is bright and ethereal, reflecting a modern studio setting with warm beige and cream tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDfUCBrW8pviSq92wqjR-s2kBlmhXh4pbB6JwsdvSEtg6ikrRp7YYDaeWn6KIkp51SKJMDpUuZ4bTYV2TUEWcQtzmfv8wvdvA1uXdyk-3zoU-2ioDX9XQy4xkDtqSIXY5jedGOSi2xuta5uSoNBV9ycRq7q2cW4g8-vXsxFElRYGkRHsvkk4ATUPg6V8Lib-Bdg3DwoWRAr2P5aXwMq8p2vxY80ySSOmflBHx2bTl63mGNr8nYa5uJ5hseZM9rPoFOK71CfrFVVZSsl"/>
+<img alt="user" class="w-8 h-8 rounded-full border-2 border-white" data-alt="Portrait of a young male dancer in a studio environment, capturing a moment of poise and concentration. Soft morning light enters through large windows, illuminating the space in warm gold and cream hues, maintaining a sophisticated minimalist aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAuMip38XuNVQCWbq2XZsXIpiLiBqNurKLjwzbArp7Y4C2CEx9CPfCiGp-ZefVzDAjurAcNwaTNP5SMncdetPvNNIjSxDHREEc7TzDqi7ZChFB14pPc9uWOXyJIuB30QdU0NaFXuhpUWWBtnmW_fpVdV6Nyl3n5eMsGq0LV1R9bgkSt_Z-YCGVBxFNbQ4HdT3U3BV2eRRRKU99O9aeCH74vE7DyWKfXt31R7stEF5jukHuds6g1fn6V-ShCu6aYCkDA4mLp_Mkkusay"/>
+<img alt="user" class="w-8 h-8 rounded-full border-2 border-white" data-alt="Cinematic headshot of a student dancer at a heritage dance studio. The background is a mix of rich textures and warm cream tones, with the lighting creating a soft glow around the subject, evoking a sense of discipline and grace." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBpgCti0CFF4rCsdcwwXUC8e2M_StrTMxCuUXmS-usdFvqi7hA16fIQ21IvLp8B5gHjlW9jidnYw6aFiDScQtn3vQ6s5VeMABrN-m516db56vuPj9F3arFFVWS21Lqpfg2N2ysuah-QmwHCXfOPdhjDZMCnBmPpwyb80QmsE9BPKN4xmF96px3HzJlu7ivMICHy7whs4QSRtrU06KpZvX9pbioTbD0jS7faV4d-luSnlOoxMRdC7quDRygT-z2O6H3fU_OgqiT3o7xV"/>
+<div class="w-8 h-8 rounded-full border-2 border-white bg-secondary-container flex items-center justify-center text-[10px] font-bold text-on-secondary-container">+147</div>
+</div>
+</div>
+<!-- Stat Card 2 -->
+<div class="bg-surface-container-lowest p-card-padding border border-secondary-fixed-dim/30 rounded-lg silk-shadow">
+<p class="font-label-caps text-label-caps text-on-surface-variant mb-2">OCUPACIÓN DE SALAS</p>
+<div class="flex items-end gap-2 mb-4">
+<span class="font-h1 text-h1 text-primary">80%</span>
+<span class="font-body-md text-on-surface-variant mb-2 text-sm">Capacidad pico</span>
+</div>
+<div class="w-full bg-surface-container-highest h-2 rounded-full overflow-hidden">
+<div class="bg-secondary h-full" style="width: 80%"></div>
+</div>
+<div class="mt-4 flex justify-between items-center text-sm font-label-caps">
+<span class="text-on-surface-variant">Sala Al-Andalus: Ocupada</span>
+<span class="text-secondary">Sala Oasis: Libre</span>
+</div>
+</div>
+<!-- Stat Card 3 -->
+<div class="bg-primary text-secondary-fixed-dim p-card-padding border border-secondary-fixed-dim rounded-lg shadow-xl relative group">
+<p class="font-label-caps text-label-caps opacity-70 mb-2">PRÓXIMOS TALLERES</p>
+<div class="flex items-center justify-between">
+<div>
+<span class="font-h2 text-h2 block leading-none">Danza Oriental</span>
+<span class="font-body-md opacity-80">Mañana, 10:00 AM</span>
+</div>
+<span class="material-symbols-outlined text-[40px] text-secondary-fixed-dim/40 group-hover:text-secondary-fixed-dim transition-colors" data-icon="calendar_month">calendar_month</span>
+</div>
+<div class="mt-6 flex gap-2">
+<span class="px-3 py-1 rounded-full border border-secondary-fixed-dim/30 text-[10px] font-label-caps">INTENSIVO</span>
+<span class="px-3 py-1 rounded-full border border-secondary-fixed-dim/30 text-[10px] font-label-caps">SALA A</span>
+</div>
+</div>
+</div>
+<!-- Dashboard Center Content -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-gutter">
+<!-- Main Chart Area -->
+<div class="lg:col-span-2 space-y-gutter">
+<!-- Revenue Chart Placeholder -->
+<div class="bg-surface-container-lowest border border-secondary-fixed-dim/30 rounded-lg p-card-padding silk-shadow">
+<div class="flex justify-between items-center mb-section-gap">
+<div>
+<h4 class="font-h3 text-h3 text-primary">Ingresos Mensuales</h4>
+<p class="font-label-caps text-label-caps text-on-surface-variant">AÑO FISCAL 2024</p>
+</div>
+<select class="bg-surface-container-low border-none rounded-lg font-label-caps text-xs px-4 py-2 focus:ring-1 focus:ring-secondary-fixed-dim">
+<option>Últimos 6 meses</option>
+<option>Último año</option>
+</select>
+</div>
+<!-- Visual Graph Mockup -->
+<div class="h-[240px] flex items-end gap-4 w-full px-4">
+<div class="flex-1 bg-surface-container-highest group relative cursor-pointer" style="height: 40%">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-primary text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">€2.4k</div>
+</div>
+<div class="flex-1 bg-surface-container-highest group relative cursor-pointer" style="height: 55%">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-primary text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">€3.1k</div>
+</div>
+<div class="flex-1 bg-surface-container-highest group relative cursor-pointer" style="height: 45%">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-primary text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">€2.8k</div>
+</div>
+<div class="flex-1 bg-surface-container-highest group relative cursor-pointer" style="height: 75%">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-primary text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">€4.2k</div>
+</div>
+<div class="flex-1 bg-primary group relative cursor-pointer" style="height: 90%">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-primary text-white text-[10px] px-2 py-1 rounded opacity-100">€5.1k</div>
+</div>
+<div class="flex-1 bg-surface-container-highest group relative cursor-pointer" style="height: 65%">
+<div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-primary text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">€3.8k</div>
+</div>
+</div>
+<div class="flex justify-between mt-4 px-4 font-label-caps text-[10px] text-on-surface-variant">
+<span>ENE</span><span>FEB</span><span>MAR</span><span>ABR</span><span class="text-primary font-bold">MAY</span><span>JUN</span>
+</div>
+</div>
+<!-- Upcoming Class List -->
+<div class="bg-surface-container-lowest border border-secondary-fixed-dim/30 rounded-lg p-card-padding silk-shadow">
+<div class="flex justify-between items-center mb-stack-md">
+<h4 class="font-h3 text-h3 text-primary">Agenda del Día</h4>
+<a class="text-secondary font-label-caps text-xs hover:underline" href="#">VER TODO EL CALENDARIO</a>
+</div>
+<div class="space-y-4">
+<div class="flex items-center p-4 border-l-4 border-secondary bg-surface-container-low transition-all hover:bg-surface-container">
+<div class="w-16 font-label-caps text-center">
+<span class="block text-primary text-lg">17:00</span>
+<span class="text-[10px] opacity-60">SALA 1</span>
+</div>
+<div class="ml-gutter">
+<h5 class="font-body-md font-bold text-primary">Bellydance Principiantes</h5>
+<p class="text-sm text-on-surface-variant">Docente: Layla Mahmoud</p>
+</div>
+<div class="ml-auto text-right">
+<span class="inline-flex items-center px-3 py-1 rounded-full border border-secondary text-secondary text-[10px] font-label-caps">
+                                        12 / 15 ASISTENCIAS
+                                    </span>
+</div>
+</div>
+<div class="flex items-center p-4 border-l-4 border-primary/20 bg-transparent transition-all hover:bg-surface-container-low">
+<div class="w-16 font-label-caps text-center">
+<span class="block text-on-surface-variant text-lg">18:30</span>
+<span class="text-[10px] opacity-60">SALA 2</span>
+</div>
+<div class="ml-gutter">
+<h5 class="font-body-md font-bold text-primary">Danza Fusion Tribal</h5>
+<p class="text-sm text-on-surface-variant">Docente: Elena Sanz</p>
+</div>
+<div class="ml-auto text-right">
+<span class="inline-flex items-center px-3 py-1 rounded-full border border-outline/30 text-on-surface-variant text-[10px] font-label-caps">
+                                        8 / 12 ASISTENCIAS
+                                    </span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Activity & Sidebar Section -->
+<div class="space-y-gutter">
+<!-- Recent Activity -->
+<div class="bg-surface-container-lowest border border-secondary-fixed-dim/30 rounded-lg p-card-padding silk-shadow">
+<h4 class="font-h3 text-h3 text-primary mb-stack-md">Actividad Reciente</h4>
+<div class="space-y-6">
+<div class="flex gap-4 relative pb-6 border-l border-outline/20 ml-2 pl-6">
+<div class="absolute left-[-5px] top-0 w-2.5 h-2.5 rounded-full bg-secondary"></div>
+<div>
+<p class="text-sm font-body-md"><span class="font-bold text-primary">Marta G.</span> se inscribió en el curso Intensivo Verano.</p>
+<span class="text-[10px] font-label-caps text-on-surface-variant/60">HACE 10 MINUTOS</span>
+</div>
+</div>
+<div class="flex gap-4 relative pb-6 border-l border-outline/20 ml-2 pl-6">
+<div class="absolute left-[-5px] top-0 w-2.5 h-2.5 rounded-full bg-primary"></div>
+<div>
+<p class="text-sm font-body-md"><span class="font-bold text-primary">Pago Recibido</span> de Mensualidad Mayo - Alumna: Sara J.</p>
+<span class="text-[10px] font-label-caps text-on-surface-variant/60">HACE 2 HORAS</span>
+</div>
+</div>
+<div class="flex gap-4 relative pb-6 border-l border-outline/20 ml-2 pl-6">
+<div class="absolute left-[-5px] top-0 w-2.5 h-2.5 rounded-full bg-on-tertiary-fixed-variant"></div>
+<div>
+<p class="text-sm font-body-md"><span class="font-bold text-primary">Reserva Sala</span> Al-Andalus confirmada para Ensayo General.</p>
+<span class="text-[10px] font-label-caps text-on-surface-variant/60">HACE 5 HORAS</span>
+</div>
+</div>
+</div>
+<button class="w-full mt-2 py-2 text-primary font-label-caps text-[10px] hover:bg-surface-container-low rounded transition-colors">CARGAR MÁS ACTIVIDAD</button>
+</div>
+<!-- Quick Actions Widget -->
+<div class="bg-primary-container p-card-padding rounded-lg silk-shadow">
+<h4 class="font-h3 text-h3 text-secondary-fixed-dim mb-4">Acceso Rápido</h4>
+<div class="grid grid-cols-2 gap-2">
+<button class="flex flex-col items-center justify-center p-4 bg-primary/40 border border-secondary-fixed-dim/20 rounded-lg hover:bg-primary/60 transition-all text-secondary-fixed-dim">
+<span class="material-symbols-outlined mb-2" data-icon="person_add">person_add</span>
+<span class="text-[10px] font-label-caps">ALUMNA</span>
+</button>
+<button class="flex flex-col items-center justify-center p-4 bg-primary/40 border border-secondary-fixed-dim/20 rounded-lg hover:bg-primary/60 transition-all text-secondary-fixed-dim">
+<span class="material-symbols-outlined mb-2" data-icon="payments">payments</span>
+<span class="text-[10px] font-label-caps">COBRAR</span>
+</button>
+<button class="flex flex-col items-center justify-center p-4 bg-primary/40 border border-secondary-fixed-dim/20 rounded-lg hover:bg-primary/60 transition-all text-secondary-fixed-dim">
+<span class="material-symbols-outlined mb-2" data-icon="history_edu">history_edu</span>
+<span class="text-[10px] font-label-caps">REPORTE</span>
+</button>
+<button class="flex flex-col items-center justify-center p-4 bg-primary/40 border border-secondary-fixed-dim/20 rounded-lg hover:bg-primary/60 transition-all text-secondary-fixed-dim">
+<span class="material-symbols-outlined mb-2" data-icon="mail">mail</span>
+<span class="text-[10px] font-label-caps">AVISO</span>
+</button>
+</div>
+</div>
+<!-- Premium Promo Card -->
+<div class="relative overflow-hidden rounded-lg h-48 group">
+<img alt="Dance Studio Background" class="absolute inset-0 w-full h-full object-cover grayscale brightness-50 group-hover:scale-110 transition-transform duration-700" data-alt="A wide-angle, high-end photograph of a professional dance studio at golden hour. The floor is made of rich, dark polished wood that reflects the warm sunlight streaming through large floor-to-ceiling windows. The room is decorated with minimalist cream-colored furniture and subtle gold accents, creating an atmosphere of luxury and serenity. No dancers are present, emphasizing the clean, sophisticated space." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBKBsGyIRKS1JdwwtXV6oU9RtcOam9hD7xfYOPEtdfvWcVv7iGKerpDhOlgBN2hIZrhunZGXxggK1lGXc7ZI38XbrkY4rhpup7wlO6ELYgq-55CAay1vtrk4PcoQb9dvs9NA71cXw29txdRvaBRiOYZ4_fBtOjroE3EsqbEJsrgb76dtTXVDS-DaHtD0kX2LQssZm99u-pyUXnSwzvErKnECOoaKHDZPWKubLcJGFJXBjjhqbwIgwNGd94obf497yAfbfnU8MiSB5Qr"/>
+<div class="absolute inset-0 bg-primary/40"></div>
+<div class="relative z-10 p-card-padding flex flex-col h-full justify-between">
+<p class="font-label-caps text-secondary-fixed text-xs">ACADEMIA PREMIUM</p>
+<div>
+<h5 class="text-white font-h3 text-h3 leading-tight mb-2">Renueva tu membresía anual</h5>
+<button class="bg-secondary text-primary px-4 py-2 text-[10px] font-label-caps font-bold rounded">MÁS INFORMACIÓN</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</body></html>

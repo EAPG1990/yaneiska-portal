@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;500;600;700&amp;family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container-highest": "#e5e2dc",
+                    "primary-container": "#5d101d",
+                    "primary-fixed-dim": "#ffb2b6",
+                    "on-primary-fixed-variant": "#7e2933",
+                    "outline": "#887272",
+                    "primary": "#3d000c",
+                    "tertiary-fixed-dim": "#cdc5c0",
+                    "surface-bright": "#fcf9f3",
+                    "secondary-fixed-dim": "#e9c176",
+                    "on-secondary-container": "#785a1a",
+                    "on-tertiary-container": "#9c9591",
+                    "on-tertiary-fixed": "#1e1b18",
+                    "background": "#fcf9f3",
+                    "on-secondary-fixed-variant": "#5d4201",
+                    "surface-tint": "#9c4049",
+                    "secondary-container": "#fed488",
+                    "inverse-surface": "#31312d",
+                    "surface-container-low": "#f6f3ed",
+                    "inverse-on-surface": "#f3f0ea",
+                    "on-primary": "#ffffff",
+                    "tertiary": "#1d1917",
+                    "tertiary-fixed": "#e9e1dc",
+                    "surface": "#fcf9f3",
+                    "surface-container-high": "#ebe8e2",
+                    "surface-container": "#f0eee8",
+                    "on-error": "#ffffff",
+                    "on-error-container": "#93000a",
+                    "on-tertiary-fixed-variant": "#4b4642",
+                    "inverse-primary": "#ffb2b6",
+                    "outline-variant": "#dbc0c1",
+                    "surface-container-lowest": "#ffffff",
+                    "on-secondary": "#ffffff",
+                    "on-surface-variant": "#554243",
+                    "on-primary-fixed": "#40000d",
+                    "on-surface": "#1c1c18",
+                    "on-secondary-fixed": "#261900",
+                    "tertiary-container": "#322e2b",
+                    "on-background": "#1c1c18",
+                    "on-primary-container": "#e1767e",
+                    "secondary": "#775a19",
+                    "primary-fixed": "#ffdada",
+                    "surface-variant": "#e5e2dc",
+                    "error-container": "#ffdad6",
+                    "secondary-fixed": "#ffdea5",
+                    "surface-dim": "#dcdad4",
+                    "on-tertiary": "#ffffff",
+                    "error": "#ba1a1a"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "unit": "8px",
+                    "stack-sm": "8px",
+                    "section-gap": "48px",
+                    "gutter": "24px",
+                    "card-padding": "24px",
+                    "container-padding": "32px",
+                    "stack-md": "16px"
+            },
+            "fontFamily": {
+                    "h2": ["Noto Serif"],
+                    "body-lg": ["Manrope"],
+                    "h3": ["Noto Serif"],
+                    "body-md": ["Manrope"],
+                    "data-tabular": ["Manrope"],
+                    "h1": ["Noto Serif"],
+                    "label-caps": ["Manrope"]
+            },
+            "fontSize": {
+                    "h2": ["32px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "500"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400"}],
+                    "h3": ["24px", {"lineHeight": "1.4", "letterSpacing": "0", "fontWeight": "500"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400"}],
+                    "data-tabular": ["14px", {"lineHeight": "1.4", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                    "h1": ["40px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "600"}],
+                    "label-caps": ["12px", {"lineHeight": "1.2", "letterSpacing": "0.08em", "fontWeight": "700"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .glass-card {
+        background: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(8px);
+      }
+      .silk-shadow {
+        box-shadow: 0 10px 30px -10px rgba(93, 16, 29, 0.1);
+      }
+      ::-webkit-scrollbar { width: 6px; }
+      ::-webkit-scrollbar-track { background: #fcf9f3; }
+      ::-webkit-scrollbar-thumb { background: #dbc0c1; border-radius: 10px; }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md overflow-x-hidden">
+<!-- SideNavBar -->
+<aside class="flex flex-col h-full py-container-padding w-64 z-50 fixed left-0 top-0 bg-primary dark:bg-primary-container border-r border-outline shadow-md">
+<div class="px-gutter mb-10 flex flex-col gap-1">
+<span class="font-h3 text-h3 font-semibold text-secondary-fixed-dim">Rhythmic Heritage</span>
+<span class="font-label-caps text-label-caps text-secondary-fixed-dim/60 uppercase">Studio Management</span>
+</div>
+<nav class="flex-1 flex flex-col gap-1">
+<a class="flex items-center gap-stack-md text-secondary-fixed-dim/70 py-stack-md px-gutter hover:bg-primary-container/50 hover:text-secondary-fixed-dim transition-all duration-300" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-caps text-label-caps">Dashboard</span>
+</a>
+<a class="flex items-center gap-stack-md text-secondary-fixed-dim/70 py-stack-md px-gutter hover:bg-primary-container/50 hover:text-secondary-fixed-dim transition-all duration-300" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="font-label-caps text-label-caps">Alumnas</span>
+</a>
+<a class="flex items-center gap-stack-md bg-primary-container text-secondary-container border-l-4 border-secondary-fixed-dim py-stack-md px-gutter Active: translate-x-1 duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">meeting_room</span>
+<span class="font-label-caps text-label-caps">Alquiler de Salas</span>
+</a>
+<a class="flex items-center gap-stack-md text-secondary-fixed-dim/70 py-stack-md px-gutter hover:bg-primary-container/50 hover:text-secondary-fixed-dim transition-all duration-300" href="#">
+<span class="material-symbols-outlined">auto_stories</span>
+<span class="font-label-caps text-label-caps">Talleres</span>
+</a>
+<a class="flex items-center gap-stack-md text-secondary-fixed-dim/70 py-stack-md px-gutter hover:bg-primary-container/50 hover:text-secondary-fixed-dim transition-all duration-300" href="#">
+<span class="material-symbols-outlined">school</span>
+<span class="font-label-caps text-label-caps">Docentes</span>
+</a>
+</nav>
+<div class="px-gutter mt-auto flex flex-col gap-4">
+<button class="w-full bg-secondary-fixed-dim text-primary py-3 px-4 font-label-caps text-label-caps font-bold shadow-lg hover:brightness-110 transition-all">
+                New Registration
+            </button>
+<div class="flex flex-col gap-1 border-t border-outline/30 pt-4">
+<a class="flex items-center gap-stack-md text-secondary-fixed-dim/70 py-2 hover:text-secondary-fixed-dim" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="font-label-caps text-label-caps">Support</span>
+</a>
+<a class="flex items-center gap-stack-md text-secondary-fixed-dim/70 py-2 hover:text-secondary-fixed-dim" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-label-caps text-label-caps">Logout</span>
+</a>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-64 min-h-screen">
+<!-- TopNavBar -->
+<header class="flex justify-between items-center w-full px-container-padding py-stack-sm bg-surface-bright dark:bg-surface-dim shadow-sm sticky top-0 z-40">
+<div class="flex items-center gap-gutter">
+<h1 class="font-h2 text-h2 font-medium text-primary">Alquiler de Salas</h1>
+<div class="hidden md:flex items-center bg-surface-container-low px-4 py-2 border border-outline-variant rounded-full">
+<span class="material-symbols-outlined text-on-surface-variant mr-2">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-body-md w-64" placeholder="Buscar reservas..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-stack-md">
+<button class="p-2 text-primary hover:bg-surface-container transition-colors rounded-full">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 text-primary hover:bg-surface-container transition-colors rounded-full">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-secondary-fixed-dim">
+<img alt="Studio Owner Profile" class="w-full h-full object-cover" data-alt="A professional and elegant portrait of a female dance studio owner with a warm, welcoming smile. She is set against a soft-focus background of a sun-drenched wooden dance floor and silk curtains. The lighting is high-key and sophisticated, highlighting a professional yet creative aura. The color palette follows the studio's deep burgundy and gold theme with luxurious warmth." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBCUuXp68YEXRiZhA874nkUK-Vj_ys5WHYNOJamC9-RWeZ1j3wCifM-0xEhLDfGLSXh6uWJ-ZzRCfvJHpUrBof1d2Km3tUI_aAkJOgylni8IMXyVaAZZP4mU9WY9WRB9ebkowldgCFfDgySWOfBlKFAg5H6mDpYz1ufygvo_OsrXbamYui7dgHYir3nBNrpSvox08yRGrRD1d7WTEglXHo0O7hdPTDD8HhB2lCFZUu4a8k8mErGHImGdg9bdnasuc2_95f9XKKCIzeF"/>
+</div>
+</div>
+</header>
+<!-- Canvas Content -->
+<div class="p-container-padding">
+<!-- Calendar Header & Actions -->
+<div class="flex flex-col md:flex-row justify-between items-end gap-gutter mb-gutter">
+<div>
+<h2 class="font-h3 text-h3 text-primary mb-1">Semana del 14 al 20 de Octubre</h2>
+<div class="flex items-center gap-stack-md text-on-surface-variant">
+<span class="flex items-center gap-1"><span class="w-3 h-3 bg-primary-container rounded-full"></span> Sala A</span>
+<span class="flex items-center gap-1"><span class="w-3 h-3 bg-secondary-container rounded-full"></span> Sala B</span>
+</div>
+</div>
+<div class="flex gap-stack-md">
+<div class="flex bg-surface-container-high p-1 rounded-lg">
+<button class="px-4 py-2 font-label-caps text-label-caps bg-surface shadow-sm text-primary">SEMANA</button>
+<button class="px-4 py-2 font-label-caps text-label-caps text-on-surface-variant hover:text-primary transition-colors">DÍA</button>
+</div>
+<button class="flex items-center gap-2 bg-primary text-on-primary px-6 py-3 font-label-caps text-label-caps shadow-lg hover:brightness-110 transition-all border border-secondary-fixed-dim">
+<span class="material-symbols-outlined text-secondary-fixed-dim">add_circle</span>
+                        NUEVA RESERVA
+                    </button>
+</div>
+</div>
+<!-- Interactive Calendar Grid -->
+<div class="bg-surface-container-lowest border border-outline-variant silk-shadow overflow-hidden">
+<!-- Days Row -->
+<div class="grid grid-cols-8 border-b border-outline-variant">
+<div class="p-4 border-r border-outline-variant bg-surface-container-low text-center font-label-caps text-on-surface-variant">HORA</div>
+<div class="p-4 text-center font-label-caps border-r border-outline-variant">LUN 14</div>
+<div class="p-4 text-center font-label-caps border-r border-outline-variant">MAR 15</div>
+<div class="p-4 text-center font-label-caps border-r border-outline-variant bg-surface-container-low/30">MIE 16</div>
+<div class="p-4 text-center font-label-caps border-r border-outline-variant">JUE 17</div>
+<div class="p-4 text-center font-label-caps border-r border-outline-variant">VIE 18</div>
+<div class="p-4 text-center font-label-caps border-r border-outline-variant">SAB 19</div>
+<div class="p-4 text-center font-label-caps">DOM 20</div>
+</div>
+<!-- Calendar Content Scroll Area -->
+<div class="grid grid-cols-8 relative h-[600px] overflow-y-auto">
+<!-- Time Column -->
+<div class="flex flex-col border-r border-outline-variant sticky left-0 bg-surface-container-low z-10">
+<div class="h-20 border-b border-outline-variant/30 flex items-start justify-center pt-2 font-data-tabular text-on-surface-variant">08:00</div>
+<div class="h-20 border-b border-outline-variant/30 flex items-start justify-center pt-2 font-data-tabular text-on-surface-variant">09:00</div>
+<div class="h-20 border-b border-outline-variant/30 flex items-start justify-center pt-2 font-data-tabular text-on-surface-variant">10:00</div>
+<div class="h-20 border-b border-outline-variant/30 flex items-start justify-center pt-2 font-data-tabular text-on-surface-variant">11:00</div>
+<div class="h-20 border-b border-outline-variant/30 flex items-start justify-center pt-2 font-data-tabular text-on-surface-variant">12:00</div>
+<div class="h-20 border-b border-outline-variant/30 flex items-start justify-center pt-2 font-data-tabular text-on-surface-variant">13:00</div>
+<div class="h-20 border-b border-outline-variant/30 flex items-start justify-center pt-2 font-data-tabular text-on-surface-variant">14:00</div>
+<div class="h-20 border-b border-outline-variant/30 flex items-start justify-center pt-2 font-data-tabular text-on-surface-variant">15:00</div>
+<div class="h-20 border-b border-outline-variant/30 flex items-start justify-center pt-2 font-data-tabular text-on-surface-variant">16:00</div>
+</div>
+<!-- Day Columns with Reservations -->
+<!-- Lunes -->
+<div class="relative border-r border-outline-variant/30 bg-white/50">
+<div class="absolute top-0 left-0 w-full h-20 bg-primary-container/10 border-l-4 border-primary-container p-2">
+<p class="font-label-caps text-[10px] text-primary leading-tight">SALA A</p>
+<p class="font-body-md font-bold text-xs truncate">Ensayo: Layla Dance</p>
+<p class="text-[10px] text-on-surface-variant">08:00 - 09:00</p>
+</div>
+<div class="absolute top-40 left-0 w-full h-40 bg-secondary-container/20 border-l-4 border-secondary-container p-2">
+<p class="font-label-caps text-[10px] text-secondary leading-tight">SALA B</p>
+<p class="font-body-md font-bold text-xs">Clase Privada: Amira</p>
+<p class="text-[10px] text-on-surface-variant">10:00 - 12:00</p>
+</div>
+</div>
+<!-- Martes -->
+<div class="relative border-r border-outline-variant/30">
+<div class="absolute top-20 left-0 w-full h-60 bg-primary-container/10 border-l-4 border-primary-container p-2">
+<p class="font-label-caps text-[10px] text-primary leading-tight">SALA A</p>
+<p class="font-body-md font-bold text-xs">Workshop: Percusión</p>
+<p class="text-[10px] text-on-surface-variant">09:00 - 12:00</p>
+</div>
+</div>
+<!-- Miércoles -->
+<div class="relative border-r border-outline-variant/30 bg-surface-container-low/20">
+<!-- Mantenimiento o Reservas -->
+</div>
+<!-- Jueves -->
+<div class="relative border-r border-outline-variant/30">
+<div class="absolute top-80 left-0 w-full h-20 bg-secondary-container/20 border-l-4 border-secondary-container p-2">
+<p class="font-label-caps text-[10px] text-secondary leading-tight">SALA B</p>
+<p class="font-body-md font-bold text-xs">Yoga Flow</p>
+<p class="text-[10px] text-on-surface-variant">12:00 - 13:00</p>
+</div>
+</div>
+<!-- Viernes -->
+<div class="relative border-r border-outline-variant/30 bg-white/50">
+<div class="absolute top-0 left-0 w-full h-20 bg-primary-container/10 border-l-4 border-primary-container p-2">
+<p class="font-label-caps text-[10px] text-primary leading-tight">SALA A</p>
+<p class="font-body-md font-bold text-xs">Técnica: Velo</p>
+<p class="text-[10px] text-on-surface-variant">08:00 - 09:00</p>
+</div>
+</div>
+<!-- Sábado -->
+<div class="relative border-r border-outline-variant/30 bg-white/50">
+<div class="absolute top-40 left-0 w-full h-80 bg-secondary-container/20 border-l-4 border-secondary-container p-2">
+<p class="font-label-caps text-[10px] text-secondary leading-tight">SALA B</p>
+<p class="font-body-md font-bold text-xs">Audiciones Heritage</p>
+<p class="text-[10px] text-on-surface-variant">10:00 - 14:00</p>
+</div>
+</div>
+<!-- Domingo -->
+<div class="relative bg-white/50">
+<!-- Closed / Limited -->
+</div>
+</div>
+</div>
+<!-- Bento Summary Cards -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter mt-section-gap">
+<!-- Proximas Reservas Card -->
+<div class="md:col-span-2 bg-surface border border-secondary-fixed-dim/30 p-card-padding silk-shadow rounded-lg">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-h3 text-h3 text-primary">Próximas Reservas de Hoy</h3>
+<a class="text-primary-container font-label-caps text-label-caps hover:underline" href="#">Ver todo</a>
+</div>
+<div class="space-y-4">
+<div class="flex items-center justify-between p-4 bg-surface-container-low rounded">
+<div class="flex items-center gap-4">
+<div class="bg-primary-container text-on-primary w-12 h-12 flex items-center justify-center rounded">
+<span class="font-h3 text-h3">A</span>
+</div>
+<div>
+<p class="font-body-md font-bold">Compañía El Nour</p>
+<p class="text-on-surface-variant text-sm">Ensayo General • Sala A</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-data-tabular font-bold text-primary">18:00 - 20:00</p>
+<span class="text-xs bg-secondary-container px-2 py-0.5 rounded text-on-secondary-container font-label-caps">PAGADO</span>
+</div>
+</div>
+<div class="flex items-center justify-between p-4 bg-surface-container-low rounded">
+<div class="flex items-center gap-4">
+<div class="bg-secondary-container text-on-secondary-container w-12 h-12 flex items-center justify-center rounded">
+<span class="font-h3 text-h3">B</span>
+</div>
+<div>
+<p class="font-body-md font-bold">Clase Privada: Karim</p>
+<p class="text-on-surface-variant text-sm">Solista Masculino • Sala B</p>
+</div>
+</div>
+<div class="text-right">
+<p class="font-data-tabular font-bold text-primary">20:30 - 21:30</p>
+<span class="text-xs border border-primary-container px-2 py-0.5 rounded text-primary-container font-label-caps">PENDIENTE</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Stats / Quick Info -->
+<div class="flex flex-col gap-gutter">
+<div class="bg-primary-container p-card-padding rounded-lg text-on-primary h-full flex flex-col justify-between">
+<div>
+<span class="material-symbols-outlined text-secondary-fixed-dim mb-4" style="font-variation-settings: 'FILL' 1;">analytics</span>
+<p class="font-label-caps text-label-caps opacity-80">Ocupación Semanal</p>
+<h4 class="font-h1 text-h1 text-secondary-fixed-dim">78%</h4>
+</div>
+<p class="text-sm opacity-60">+12% respecto al mes anterior</p>
+</div>
+<div class="bg-white border border-secondary-fixed-dim p-card-padding rounded-lg h-full silk-shadow flex flex-col justify-between">
+<div>
+<p class="font-label-caps text-label-caps text-on-surface-variant">Ingresos Alquileres (Oct)</p>
+<h4 class="font-h2 text-h2 text-primary">$1,250.00</h4>
+</div>
+<button class="w-full mt-4 text-primary font-label-caps text-label-caps border-b border-primary text-left pb-1 hover:text-primary-container transition-colors">DESCARGAR REPORTE</button>
+</div>
+</div>
+</div>
+<!-- Footer Decorative Element -->
+<div class="mt-section-gap opacity-20 flex justify-center">
+<img alt="Movement Backdrop" class="w-full max-w-4xl h-16 object-cover grayscale brightness-50 contrast-125" data-alt="A subtle, horizontal decorative background image showing the abstract motion of a dancer's silk veil in warm deep burgundy and golden tones. The motion is blurred and ethereal, suggesting rhythm and elegance. It serves as a sophisticated separator in the UI, maintaining the brand's heritage and professional aesthetic through artistic movement and high-end lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDrsnygy4i_SDl2UMGMustf0wYJGLhxyaHGnBPq-N_DuJD9mJb65_9AiKq_aOf2vm_x38f7kHEGrSaH4RBbrIavvtYZR825v9cXnaCglH-bMI4peLBnNU_mPpXIwj8-Kl7Y-EAMijA3XrS-5mCxRZfUufEkfvgrt8GHy1KcU0ThsTsGI8L5EIQ1gif-kY9GGphowqkT0O2ucfICuJuKzuCT8fRD2WscfG0fe-2mjHG2KZE7sG9NB2mt__LlDBUDLmmvYDx793dButNz"/>
+</div>
+</div>
+</main>
+<!-- FAB for Quick Reservation (Hidden on Desktop if needed, but here as a quick tool) -->
+<button class="fixed bottom-8 right-8 w-16 h-16 bg-primary text-secondary-fixed-dim rounded-full shadow-2xl flex items-center justify-center hover:scale-105 transition-transform z-50">
+<span class="material-symbols-outlined text-3xl">add</span>
+</button>
+</body></html>
