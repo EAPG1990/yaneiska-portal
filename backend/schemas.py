@@ -43,6 +43,11 @@ class AlumnaBase(BaseModel):
     docente_id: Optional[int] = None
     es_clase_prueba: bool = False
     activo: bool = True
+    docente_ids: Optional[str] = None
+    dia_hora_clase: Optional[str] = None
+    fecha_nacimiento: Optional[date] = None
+    contacto_emergencia: Optional[str] = None
+    autoriza_imagen: Optional[bool] = True
 
 class AlumnaCreate(AlumnaBase):
     pass
@@ -152,6 +157,7 @@ class TallerBase(BaseModel):
     mes: int
     anio: int
     pago_facilitador_realizado: bool = False
+    pagado: bool = False
 
 class TallerCreate(TallerBase):
     pass
@@ -189,3 +195,33 @@ class PublicidadOut(PublicidadBase):
     id: int
     class Config:
         from_attributes = True
+
+# Schemas de PagoAlumna
+class PagoAlumnaBase(BaseModel):
+    alumna_id: int
+    mes: int
+    anio: int
+    monto: float = 0.0
+    senado: Optional[bool] = False
+    pagado: bool = False
+    fecha_pago: Optional[datetime] = None
+
+class PagoAlumnaCreate(PagoAlumnaBase):
+    pass
+
+class PagoAlumnaOut(PagoAlumnaBase):
+    id: int
+    class Config:
+        from_attributes = True
+
+class PagoAlumnaStatusOut(BaseModel):
+    alumna_id: int
+    nombre: str
+    apellido: str
+    combo_nombre: str
+    monto_esperado: float
+    monto_pagado: float
+    pagado: bool
+    fecha_pago: Optional[datetime] = None
+    pago_id: Optional[int] = None
+

@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from routers import auth as auth_router, alumnas, docentes, operaciones, configuraciones, alquileres, talleres, gastos, dashboard
+from routers import auth as auth_router, alumnas, docentes, operaciones, configuraciones, alquileres, talleres, gastos, dashboard, pagos
 
 app = FastAPI(title="Estudio Jimena González API")
 
@@ -24,6 +24,7 @@ app.include_router(alquileres.router)
 app.include_router(talleres.router)
 app.include_router(gastos.router)
 app.include_router(dashboard.router)
+app.include_router(pagos.router)
 
 @app.get("/")
 async def root():

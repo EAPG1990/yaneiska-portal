@@ -32,3 +32,15 @@ Thumbs.db
 .env
 **/.env
 .env.*
+
+# Archivos de compilación de Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+
+# Planillas y archivos Excel (Información Sensible)
+*.xlsx
+*.xls
+~$*.xlsx

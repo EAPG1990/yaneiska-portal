@@ -35,6 +35,14 @@ const talleresService = {
       headers: { Authorization: `Bearer ${token}` }
     });
     return response.data;
+  },
+
+  togglePago: async (id) => {
+    const token = authService.getToken();
+    const response = await axios.put(`${API_URL}/${id}/pagar`, {}, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+    return response.data;
   }
 };
 

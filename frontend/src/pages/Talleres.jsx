@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { History, Calendar, User, DollarSign, Plus, Trash2, CheckCircle, XCircle, Save, TrendingUp, Wallet } from 'lucide-react';
+import { History, Calendar, User, DollarSign, Plus, Trash2, CheckCircle, XCircle, Save, TrendingUp, Wallet, Check, AlertCircle, RefreshCw } from 'lucide-react';
+import { motion } from 'framer-motion';
 import talleresService from '../services/talleres';
 import authService from '../services/auth';
 
 const Talleres = () => {
   const [talleres, setTalleres] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [syncingId, setSyncingId] = useState(null); // Cobro taller
+  const [syncingFacilitadorId, setSyncingFacilitadorId] = useState(null); // Pago docente
   const [selectedMes, setSelectedMes] = useState(new Date().getMonth() + 1);
   const [selectedAnio, setSelectedAnio] = useState(new Date().getFullYear());
   const [isAdmin, setIsAdmin] = useState(false);
@@ -65,7 +68,9 @@ const Talleres = () => {
         mes: selectedMes,
         anio: selectedAnio,
         total_ingreso,
-        pago_facilitador
+        pago_facilitador,
+        pagado: false,
+        pago_facilitador_realizado: false
       });
       setForm({ ...form, nombre: '', facilitador: '', total_ingreso: '', pago_facilitador: '' });
       fetchTalleres();
@@ -81,13 +86,36 @@ const Talleres = () => {
     }
   };
 
-  const handleTogglePago = async (id) => {
-    await talleresService.togglePagoFacilitador(id);
-    fetchTalleres();
+  const handleTogglePagoFacilitador = async (id) => {
+    setSyncingFacilitadorId(id);
+    try {
+      const updated = await talleresService.togglePagoFacilitador(id);
+      setTalleres(prev => prev.map(t => t.id === id ? { ...t, pago_facilitador_realizado: updated.pago_facilitador_realizado } : t));
+    } catch (error) {
+      console.error('Error toggling facilitator payment:', error);
+      alert('Error al actualizar el pago al facilitador');
+    } finally {
+      setSyncingFacilitadorId(null);
+    }
   };
 
-  const totalIngresos = talleres.reduce((acc, curr) => acc + curr.total_ingreso, 0);
-  const totalGanancia = talleres.reduce((acc, curr) => acc + (curr.total_ingreso - curr.pago_facilitador), 0);
+  const handleTogglePagoTaller = async (id) => {
+    setSyncingId(id);
+    try {
+      const updated = await talleresService.togglePago(id);
+      setTalleres(prev => prev.map(t => t.id === id ? { ...t, pagado: updated.pagado } : t));
+    } catch (error) {
+      console.error('Error toggling workshop payment:', error);
+      alert('Error al actualizar el cobro del taller');
+    } finally {
+      setSyncingId(null);
+    }
+  };
+
+  // Cálculos dinámicos de cobros y ganancias neta reales
+  const totalRecaudado = talleres.filter(t => t.pagado).reduce((acc, curr) => acc + curr.total_ingreso, 0);
+  const totalPendiente = talleres.filter(t => !t.pagado).reduce((acc, curr) => acc + curr.total_ingreso, 0);
+  const totalGananciaReal = talleres.filter(t => t.pagado).reduce((acc, curr) => acc + (curr.total_ingreso - curr.pago_facilitador), 0);
 
   return (
     <div className="space-y-8 animate-in fade-in duration-500">
@@ -213,17 +241,46 @@ const Talleres = () => {
 
         {/* Resumen y Tabla */}
         <div className="lg:col-span-3 space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="bg-primary p-6 rounded-2xl text-gold silk-shadow relative overflow-hidden">
-              <p className="text-[10px] font-bold uppercase tracking-widest opacity-60">Ingresos Totales Talleres</p>
-              <h3 className="text-3xl font-serif mt-1">$ {totalIngresos.toLocaleString()}</h3>
-              <TrendingUp className="absolute -right-2 -bottom-2 w-20 h-20 opacity-10" />
-            </div>
-            <div className="bg-burgundy p-6 rounded-2xl text-gold silk-shadow relative overflow-hidden">
-              <p className="text-[10px] font-bold uppercase tracking-widest opacity-60">Ganancia Neta Estudio</p>
-              <h3 className="text-3xl font-serif mt-1">$ {totalGanancia.toLocaleString()}</h3>
-              <Wallet className="absolute -right-2 -bottom-2 w-20 h-20 opacity-10" />
-            </div>
+          {/* Summary Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <motion.div 
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="bg-white p-5 rounded-3xl golden-border-detail silk-shadow relative overflow-hidden"
+            >
+              <div className="p-3 rounded-2xl bg-emerald-50 text-emerald-600 w-fit mb-3">
+                <DollarSign className="w-5 h-5" />
+              </div>
+              <p className="text-[9px] font-bold uppercase tracking-widest text-on-surface-variant opacity-60">Total Recaudado</p>
+              <h3 className="text-2xl font-serif text-emerald-600 mt-1">$ {totalRecaudado.toLocaleString()}</h3>
+            </motion.div>
+
+            <motion.div 
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 }}
+              className="bg-white p-5 rounded-3xl golden-border-detail silk-shadow relative overflow-hidden"
+            >
+              <div className="p-3 rounded-2xl bg-rose-50 text-rose-500 w-fit mb-3">
+                <DollarSign className="w-5 h-5" />
+              </div>
+              <p className="text-[9px] font-bold uppercase tracking-widest text-on-surface-variant opacity-60">Monto Pendiente</p>
+              <h3 className="text-2xl font-serif text-rose-500 mt-1">$ {totalPendiente.toLocaleString()}</h3>
+            </motion.div>
+
+            <motion.div 
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="bg-white p-5 rounded-3xl golden-border-detail silk-shadow relative overflow-hidden"
+            >
+              <div className="p-3 rounded-2xl bg-cream text-gold w-fit mb-3">
+                <Wallet className="w-5 h-5" />
+              </div>
+              <p className="text-[9px] font-bold uppercase tracking-widest text-on-surface-variant opacity-60">Ganancia Neta Real</p>
+              <h3 className="text-2xl font-serif text-burgundy mt-1">$ {totalGananciaReal.toLocaleString()}</h3>
+              <p className="text-[8px] text-secondary mt-0.5 font-medium">De talleres cobrados</p>
+            </motion.div>
           </div>
 
           <div className="bg-white rounded-2xl golden-border-detail silk-shadow overflow-hidden">
@@ -242,15 +299,16 @@ const Talleres = () => {
                     <th className="px-6 py-4 text-right">Ingreso</th>
                     <th className="px-6 py-4 text-right">Pago Facil.</th>
                     <th className="px-6 py-4 text-right">Ganancia</th>
-                    <th className="px-6 py-4 text-center">Estado Pago</th>
+                    <th className="px-6 py-4 text-center">Cobro Taller</th>
+                    <th className="px-6 py-4 text-center">Pago Docente</th>
                     <th className="px-6 py-4 text-right">Acción</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gold/5">
                   {loading ? (
-                    <tr><td colSpan="7" className="px-6 py-12 text-center italic opacity-50">Cargando...</td></tr>
+                    <tr><td colSpan="8" className="px-6 py-12 text-center italic opacity-50">Cargando...</td></tr>
                   ) : talleres.length === 0 ? (
-                    <tr><td colSpan="7" className="px-6 py-12 text-center italic opacity-50">No hay talleres este mes.</td></tr>
+                    <tr><td colSpan="8" className="px-6 py-12 text-center italic opacity-50">No hay talleres este mes.</td></tr>
                   ) : (
                     talleres.map((t) => (
                       <tr key={t.id} className="hover:bg-cream/20 transition-colors">
@@ -270,13 +328,73 @@ const Talleres = () => {
                         <td className="px-6 py-4 text-right font-bold text-burgundy">
                           $ {(t.total_ingreso - t.pago_facilitador).toLocaleString()}
                         </td>
+                        {/* Cobro Taller (Estudio) */}
                         <td className="px-6 py-4 text-center">
-                          <button 
-                            onClick={() => handleTogglePago(t.id)}
-                            className={`flex items-center gap-1 mx-auto px-2 py-1 rounded-full text-[10px] font-bold uppercase ${t.pago_facilitador_realizado ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}
-                          >
-                            {t.pago_facilitador_realizado ? <CheckCircle className="w-3 h-3" /> : <XCircle className="w-3 h-3" />}
-                            {t.pago_facilitador_realizado ? 'Pagado' : 'Pendiente'}
+                          <div className="flex justify-center">
+                            <button
+                              type="button"
+                              disabled={syncingId === t.id}
+                              className={`
+                                px-3 py-1.5 rounded-xl text-[9px] font-bold uppercase tracking-widest silk-shadow
+                                flex items-center gap-1.5 transition-all duration-300 transform active:scale-95
+                                disabled:opacity-50 min-w-[110px] justify-center
+                                ${t.pagado 
+                                  ? 'bg-emerald-50 text-emerald-700 border border-emerald-200 hover:bg-emerald-100 hover:border-emerald-300' 
+                                  : 'bg-rose-50 text-rose-700 border border-rose-200 hover:bg-rose-100 hover:border-rose-300'}
+                              `}
+                              onClick={() => handleTogglePagoTaller(t.id)}
+                            >
+                              {syncingId === t.id ? (
+                                <RefreshCw className="w-3.5 h-3.5 animate-spin" />
+                              ) : t.pagado ? (
+                                <>
+                                  <Check className="w-3.5 h-3.5" />
+                                  PAGADO
+                                </>
+                              ) : (
+                                <>
+                                  <AlertCircle className="w-3.5 h-3.5" />
+                                  IMPAGO
+                                </>
+                              )}
+                            </button>
+                          </div>
+                        </td>
+                        {/* Pago Docente (Facilitador) */}
+                        <td className="px-6 py-4 text-center">
+                          <div className="flex justify-center">
+                            <button
+                              type="button"
+                              disabled={syncingFacilitadorId === t.id}
+                              className={`
+                                px-3 py-1.5 rounded-xl text-[9px] font-bold uppercase tracking-widest silk-shadow
+                                flex items-center gap-1.5 transition-all duration-300 transform active:scale-95
+                                disabled:opacity-50 min-w-[110px] justify-center
+                                ${t.pago_facilitador_realizado 
+                                  ? 'bg-emerald-50 text-emerald-700 border border-emerald-200 hover:bg-emerald-100 hover:border-emerald-300' 
+                                  : 'bg-rose-50 text-rose-700 border border-rose-200 hover:bg-rose-100 hover:border-rose-300'}
+                              `}
+                              onClick={() => handleTogglePagoFacilitador(t.id)}
+                            >
+                              {syncingFacilitadorId === t.id ? (
+                                <RefreshCw className="w-3.5 h-3.5 animate-spin" />
+                              ) : t.pago_facilitador_realizado ? (
+                                <>
+                                  <Check className="w-3.5 h-3.5" />
+                                  PAGADO
+                                </>
+                              ) : (
+                                <>
+                                  <AlertCircle className="w-3.5 h-3.5" />
+                                  PENDIENTE
+                                </>
+                              )}
+                            </button>
+                          </div>
+                        </td>
+                        <td className="px-6 py-4 text-right">
+                          <button onClick={() => handleDelete(t.id)} className="p-2 hover:bg-red-50 text-red-400 rounded-lg">
+                            <Trash2 className="w-4 h-4" />
                           </button>
                         </td>
                         <td className="px-6 py-4 text-right">

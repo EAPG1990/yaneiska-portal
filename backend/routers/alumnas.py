@@ -12,7 +12,7 @@ def get_alumnas(
     current_user: models.User = Depends(auth.get_current_user)
 ):
     try:
-        return db.query(models.Alumna).all()
+        return db.query(models.Alumna).order_by(models.Alumna.nombre.asc(), models.Alumna.apellido.asc()).all()
     except Exception as e:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
