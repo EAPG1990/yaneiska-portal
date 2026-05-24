@@ -103,3 +103,52 @@ def register_clase_docente(
     db.commit()
     db.refresh(new_clase)
     return new_clase
+
+@router.put("/clases/{id}", response_model=schemas.ClaseDocenteOut)
+def update_clase_docente(
+    id: int,
+    clase_update: schemas.ClaseDocenteCreate,
+    db: Session = Depends(database.get_db),
+    current_user: models.User = Depends(auth.get_current_user)
+):
+    db_clase = db.query(models.ClaseDocente).filter(models.ClaseDocente.id == id).first()
+    if not db_clase:
+        raise HTTPException(status_code=404, detail="Registro de clase no encontrado")
+
+    # Permisos: ADMIN puede todo; DOCENTE solo el suyo propio
+    if current_user.role == models.UserRole.DOCENTE:
+        docente = db.query(models.Docente).filter(models.Docente.user_id == current_user.id).first()
+        if not docente or db_clase.docente_id != docente.id or clase_update.docente_id != docente.id:
+            raise HTTPException(status_code=403, detail="No tienes permiso para modificar este registro")
+
+    # Actualizar campos
+    for key, value in clase_update.dict().items():
+        setattr(db_clase, key, value)
+    
+    # Recalcular pago total
+    db_clase.total_pago = db_clase.cantidad_clases * db_clase.tarifa_hora
+    
+    db.commit()
+    db.refresh(db_clase)
+    return db_clase
+
+@router.delete("/clases/{id}")
+def delete_clase_docente(
+    id: int,
+    db: Session = Depends(database.get_db),
+    current_user: models.User = Depends(auth.get_current_user)
+):
+    db_clase = db.query(models.ClaseDocente).filter(models.ClaseDocente.id == id).first()
+    if not db_clase:
+        raise HTTPException(status_code=404, detail="Registro de clase no encontrado")
+
+    # Permisos: ADMIN puede todo; DOCENTE solo el suyo propio
+    if current_user.role == models.UserRole.DOCENTE:
+        docente = db.query(models.Docente).filter(models.Docente.user_id == current_user.id).first()
+        if not docente or db_clase.docente_id != docente.id:
+            raise HTTPException(status_code=403, detail="No tienes permiso para eliminar este registro")
+
+    db.delete(db_clase)
+    db.commit()
+    return {"detail": "Registro de clase eliminado correctamente"}
+

@@ -30,6 +30,12 @@ const Dashboard = () => {
       setData(response.data);
     } catch (error) {
       console.error('Error fetching dashboard data:', error);
+      if (error.response?.status === 401) {
+        authService.logout();
+        window.location.href = '/login';
+      } else {
+        alert('Error al cargar datos del panel: ' + (error.response?.data?.detail || error.message || 'Error desconocido'));
+      }
     } finally {
       setLoading(false);
     }

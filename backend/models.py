@@ -71,6 +71,13 @@ class Alumna(Base):
     continuo_despues_prueba = Column(Boolean, default=True)
     activo = Column(Boolean, default=True)
     fecha_ingreso = Column(Date, default=datetime.utcnow().date())
+    
+    # Nuevos campos
+    docente_ids = Column(String, nullable=True)
+    dia_hora_clase = Column(String, nullable=True)
+    fecha_nacimiento = Column(Date, nullable=True)
+    contacto_emergencia = Column(String, nullable=True)
+    autoriza_imagen = Column(Boolean, default=True)
 
     combo = relationship("Combo")
     nivel_obj = relationship("Nivel")
@@ -148,6 +155,7 @@ class Taller(Base):
     mes = Column(Integer)
     anio = Column(Integer)
     pago_facilitador_realizado = Column(Boolean, default=False)
+    pagado = Column(Boolean, default=False)
 
 class Publicidad(Base):
     __tablename__ = "publicidad"

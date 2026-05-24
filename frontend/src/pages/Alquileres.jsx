@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Layout, Calendar, Clock, DollarSign, User, Plus, Trash2, CheckCircle, XCircle, Save, ShieldAlert } from 'lucide-react';
+import { Layout, Calendar, Clock, DollarSign, User, Plus, Trash2, CheckCircle, XCircle, Save, ShieldAlert, Check, AlertCircle, RefreshCw } from 'lucide-react';
+import { motion } from 'framer-motion';
 import alquileresService from '../services/alquileres';
 import configService from '../services/configuraciones';
 import authService from '../services/auth';
@@ -7,6 +8,7 @@ import authService from '../services/auth';
 const Alquileres = () => {
   const [alquileres, setAlquileres] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [syncingId, setSyncingId] = useState(null);
   const [selectedMes, setSelectedMes] = useState(new Date().getMonth() + 1);
   const [selectedAnio, setSelectedAnio] = useState(new Date().getFullYear());
   const [isAdmin, setIsAdmin] = useState(false);
@@ -86,11 +88,24 @@ const Alquileres = () => {
   };
 
   const handleTogglePago = async (id) => {
-    await alquileresService.togglePago(id);
-    fetchAlquileres();
+    setSyncingId(id);
+    try {
+      const updated = await alquileresService.togglePago(id);
+      setAlquileres(prev => prev.map(a => a.id === id ? { ...a, pagado: updated.pagado } : a));
+    } catch (error) {
+      console.error('Error toggling payment:', error);
+      alert('Error al actualizar el estado de pago');
+    } finally {
+      setSyncingId(null);
+    }
   };
 
-  const totalMensual = alquileres.reduce((acc, curr) => acc + curr.total, 0);
+  // Cálculos dinámicos de cobros
+  const totalRecaudado = alquileres.filter(a => a.pagado).reduce((acc, curr) => acc + curr.total, 0);
+  const totalPendiente = alquileres.filter(a => !a.pagado).reduce((acc, curr) => acc + curr.total, 0);
+  const totalAlquileres = alquileres.length;
+  const pagadosAlquileres = alquileres.filter(a => a.pagado).length;
+  const porcentajeCobro = totalAlquileres > 0 ? Math.round((pagadosAlquileres / totalAlquileres) * 100) : 0;
 
   return (
     <div className="space-y-8 animate-in fade-in duration-500">
@@ -239,14 +254,57 @@ const Alquileres = () => {
           )}
         </div>
 
-        {/* Tabla de Registros */}
+        {/* Tabla de Registros y Métricas */}
         <div className="lg:col-span-2 space-y-6">
-          <div className="bg-burgundy p-6 rounded-2xl text-gold silk-shadow flex justify-between items-center relative overflow-hidden">
-            <div className="relative z-10">
-              <p className="text-[10px] font-bold uppercase tracking-widest opacity-60">Ingresos Totales {meses[selectedMes - 1]}</p>
-              <h3 className="text-3xl font-serif mt-1">$ {totalMensual.toLocaleString()}</h3>
-            </div>
-            <DollarSign className="absolute -right-4 -bottom-4 w-32 h-32 opacity-10" />
+          {/* Summary Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <motion.div 
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="bg-white p-5 rounded-3xl golden-border-detail silk-shadow relative overflow-hidden"
+            >
+              <div className="p-3 rounded-2xl bg-emerald-50 text-emerald-600 w-fit mb-3">
+                <DollarSign className="w-5 h-5" />
+              </div>
+              <p className="text-[9px] font-bold uppercase tracking-widest text-on-surface-variant opacity-60">Total Recaudado</p>
+              <h3 className="text-2xl font-serif text-emerald-600 mt-1">$ {totalRecaudado.toLocaleString()}</h3>
+            </motion.div>
+
+            <motion.div 
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 }}
+              className="bg-white p-5 rounded-3xl golden-border-detail silk-shadow relative overflow-hidden"
+            >
+              <div className="p-3 rounded-2xl bg-rose-50 text-rose-500 w-fit mb-3">
+                <DollarSign className="w-5 h-5" />
+              </div>
+              <p className="text-[9px] font-bold uppercase tracking-widest text-on-surface-variant opacity-60">Monto Pendiente</p>
+              <h3 className="text-2xl font-serif text-rose-500 mt-1">$ {totalPendiente.toLocaleString()}</h3>
+            </motion.div>
+
+            <motion.div 
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="bg-white p-5 rounded-3xl golden-border-detail silk-shadow relative overflow-hidden"
+            >
+              <div className="p-3 rounded-2xl bg-cream text-gold w-fit mb-3">
+                <RefreshCw className="w-5 h-5" />
+              </div>
+              <p className="text-[9px] font-bold uppercase tracking-widest text-on-surface-variant opacity-60">Alquileres Cobrados</p>
+              <h3 className="text-2xl font-serif text-burgundy mt-1">{pagadosAlquileres} / {totalAlquileres}</h3>
+              
+              <div className="mt-3 space-y-1">
+                <div className="flex justify-between text-[8px] font-bold uppercase tracking-wider text-secondary">
+                  <span>Cobro</span>
+                  <span>{porcentajeCobro}%</span>
+                </div>
+                <div className="h-1.5 bg-cream rounded-full overflow-hidden">
+                  <div className="h-full bg-burgundy rounded-full transition-all duration-500" style={{ width: `${porcentajeCobro}%` }} />
+                </div>
+              </div>
+            </motion.div>
           </div>
 
           <div className="bg-white rounded-2xl golden-border-detail silk-shadow overflow-hidden">
@@ -284,13 +342,35 @@ const Alquileres = () => {
                           $ {a.total.toLocaleString()}
                         </td>
                         <td className="px-6 py-4 text-center">
-                          <button 
-                            onClick={() => handleTogglePago(a.id)}
-                            className={`flex items-center gap-1 mx-auto px-2 py-1 rounded-full text-[10px] font-bold uppercase ${a.pagado ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}
-                          >
-                            {a.pagado ? <CheckCircle className="w-3 h-3" /> : <XCircle className="w-3 h-3" />}
-                            {a.pagado ? 'Pagado' : 'Pendiente'}
-                          </button>
+                          <div className="flex justify-center">
+                            <button
+                              type="button"
+                              disabled={syncingId === a.id}
+                              className={`
+                                px-4 py-2 rounded-xl text-[9px] font-bold uppercase tracking-widest silk-shadow
+                                flex items-center gap-1.5 transition-all duration-300 transform active:scale-95
+                                disabled:opacity-50 min-w-[110px] justify-center
+                                ${a.pagado 
+                                  ? 'bg-emerald-50 text-emerald-700 border border-emerald-200 hover:bg-emerald-100 hover:border-emerald-300' 
+                                  : 'bg-rose-50 text-rose-700 border border-rose-200 hover:bg-rose-100 hover:border-rose-300'}
+                              `}
+                              onClick={() => handleTogglePago(a.id)}
+                            >
+                              {syncingId === a.id ? (
+                                <RefreshCw className="w-3 h-3 animate-spin" />
+                              ) : a.pagado ? (
+                                <>
+                                  <Check className="w-3 h-3" />
+                                  PAGADO
+                                </>
+                              ) : (
+                                <>
+                                  <AlertCircle className="w-3 h-3" />
+                                  IMPAGO
+                                </>
+                              )}
+                            </button>
+                          </div>
                         </td>
                         <td className="px-6 py-4 text-right">
                           <button onClick={() => handleDelete(a.id)} className="p-2 hover:bg-red-50 text-red-400 rounded-lg">

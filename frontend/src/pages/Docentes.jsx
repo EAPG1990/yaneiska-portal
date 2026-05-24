@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { GraduationCap, Clock, DollarSign, Calendar, Plus, Save, UserPlus, History, ShieldAlert, Settings } from 'lucide-react';
+import { GraduationCap, Clock, DollarSign, Calendar, Plus, Save, UserPlus, History, ShieldAlert, Settings, Edit2, Trash2 } from 'lucide-react';
 import docentesService from '../services/docentes';
 import configService from '../services/configuraciones';
 import authService from '../services/auth';
@@ -13,7 +13,9 @@ const Docentes = () => {
   const [selectedMes, setSelectedMes] = useState(new Date().getMonth() + 1);
   const [selectedAnio, setSelectedAnio] = useState(new Date().getFullYear());
   const [userRole, setUserRole] = useState('');
+  const [currentUser, setCurrentUser] = useState(null);
   const [tarifas, setTarifas] = useState({ tarifa_docente_1h: 9900, tarifa_docente_1_5h: 14800 });
+  const [editingClaseId, setEditingClaseId] = useState(null);
   
   // Form para registrar clases
   const [horaForm, setHoraForm] = useState({
@@ -31,7 +33,10 @@ const Docentes = () => {
     // Obtener rol del usuario de forma segura
     const checkUser = async () => {
       const user = await authService.getCurrentUser();
-      if (user) setUserRole(user.role);
+      if (user) {
+        setUserRole(user.role);
+        setCurrentUser(user);
+      }
     };
     
     checkUser();
@@ -52,6 +57,12 @@ const Docentes = () => {
       if (configData) setTarifas(configData);
     } catch (error) {
       console.error('Error fetching initial data:', error);
+      if (error.response?.status === 401) {
+        authService.logout();
+        window.location.href = '/login';
+      } else {
+        alert('Error al cargar docentes: ' + (error.response?.data?.detail || error.message || 'Error desconocido'));
+      }
     }
   };
 
@@ -62,6 +73,12 @@ const Docentes = () => {
       setClasesMensuales(clasesData);
     } catch (error) {
       console.error('Error fetching clases:', error);
+      if (error.response?.status === 401) {
+        authService.logout();
+        window.location.href = '/login';
+      } else {
+        alert('Error al cargar clases: ' + (error.response?.data?.detail || error.message || 'Error desconocido'));
+      }
     } finally {
       setLoading(false);
     }
@@ -75,21 +92,69 @@ const Docentes = () => {
     const tarifaVigente = parseFloat(tarifas[tarifaClave]);
 
     try {
-      await docentesService.registrarClase({
-        ...horaForm,
-        mes: selectedMes,
-        anio: selectedAnio,
-        cantidad_clases: parseInt(horaForm.cantidad_clases),
-        duracion: parseFloat(horaForm.duracion),
-        tarifa_hora: tarifaVigente, // Se guarda el precio por clase de esa duración
-        horas_ejecutadas: parseInt(horaForm.cantidad_clases) * parseFloat(horaForm.duracion),
-        tipo: 'Normal' // Valor por defecto interno
-      });
+      if (editingClaseId) {
+        await docentesService.updateClase(editingClaseId, {
+          ...horaForm,
+          mes: selectedMes,
+          anio: selectedAnio,
+          cantidad_clases: parseInt(horaForm.cantidad_clases),
+          duracion: parseFloat(horaForm.duracion),
+          tarifa_hora: tarifaVigente,
+          horas_ejecutadas: parseInt(horaForm.cantidad_clases) * parseFloat(horaForm.duracion),
+          tipo: 'Normal'
+        });
+        alert('Registro actualizado correctamente');
+        setEditingClaseId(null);
+      } else {
+        await docentesService.registrarClase({
+          ...horaForm,
+          mes: selectedMes,
+          anio: selectedAnio,
+          cantidad_clases: parseInt(horaForm.cantidad_clases),
+          duracion: parseFloat(horaForm.duracion),
+          tarifa_hora: tarifaVigente, // Se guarda el precio por clase de esa duración
+          horas_ejecutadas: parseInt(horaForm.cantidad_clases) * parseFloat(horaForm.duracion),
+          tipo: 'Normal' // Valor por defecto interno
+        });
+        alert('Clases registradas correctamente');
+      }
       fetchClases();
       setHoraForm({ ...horaForm, cantidad_clases: '' });
-      alert('Clases registradas correctamente');
     } catch (error) {
-      alert('Error al registrar clases');
+      alert(editingClaseId ? 'Error al actualizar registro' : 'Error al registrar clases');
+    }
+  };
+
+  const handleStartEdit = (clase) => {
+    setEditingClaseId(clase.id);
+    setHoraForm({
+      docente_id: clase.docente_id.toString(),
+      cantidad_clases: clase.cantidad_clases.toString(),
+      duracion: clase.duracion.toString()
+    });
+  };
+
+  const handleCancelEdit = () => {
+    setEditingClaseId(null);
+    setHoraForm({
+      docente_id: '',
+      cantidad_clases: '',
+      duracion: '1.0'
+    });
+  };
+
+  const handleDeleteClase = async (id) => {
+    if (window.confirm('¿Estás seguro de que deseas eliminar este registro de clase?')) {
+      try {
+        await docentesService.deleteClase(id);
+        alert('Registro eliminado correctamente');
+        if (editingClaseId === id) {
+          handleCancelEdit();
+        }
+        fetchClases();
+      } catch (error) {
+        alert('Error al eliminar el registro');
+      }
     }
   };
 
@@ -131,7 +196,9 @@ const Docentes = () => {
               <div className="w-10 h-10 bg-gold/10 rounded-lg flex items-center justify-center text-gold">
                 <Clock className="w-6 h-6" />
               </div>
-              <h2 className="text-xl font-serif text-primary">Carga Mensual</h2>
+              <h2 className="text-xl font-serif text-primary">
+                {editingClaseId ? 'Editar Registro' : 'Carga Mensual'}
+              </h2>
             </div>
 
             <form onSubmit={handleRegistrarHoras} className="space-y-4">
@@ -185,13 +252,32 @@ const Docentes = () => {
                 </div>
               )}
 
-              <button 
-                type="submit"
-                className="w-full bg-burgundy text-gold py-3 rounded-lg font-bold text-xs uppercase tracking-widest hover:bg-primary transition-all flex items-center justify-center gap-2 shadow-lg mt-4"
-              >
-                <Save className="w-4 h-4" />
-                Guardar Registro
-              </button>
+              {editingClaseId ? (
+                <div className="flex gap-2 mt-4">
+                  <button 
+                    type="button"
+                    onClick={handleCancelEdit}
+                    className="w-1/2 border border-gold text-burgundy py-3 rounded-lg font-bold text-xs uppercase tracking-widest hover:bg-gold/10 transition-all flex items-center justify-center"
+                  >
+                    Cancelar
+                  </button>
+                  <button 
+                    type="submit"
+                    className="w-1/2 bg-burgundy text-gold py-3 rounded-lg font-bold text-xs uppercase tracking-widest hover:bg-primary transition-all flex items-center justify-center gap-2 shadow-lg"
+                  >
+                    <Save className="w-4 h-4" />
+                    Guardar
+                  </button>
+                </div>
+              ) : (
+                <button 
+                  type="submit"
+                  className="w-full bg-burgundy text-gold py-3 rounded-lg font-bold text-xs uppercase tracking-widest hover:bg-primary transition-all flex items-center justify-center gap-2 shadow-lg mt-4"
+                >
+                  <Save className="w-4 h-4" />
+                  Guardar Registro
+                </button>
+              )}
             </form>
           </div>
 
@@ -324,6 +410,7 @@ const Docentes = () => {
                     <th className="px-6 py-4">Cantidad</th>
                     <th className="px-6 py-4">Duración</th>
                     {isAdmin && <th className="px-6 py-4 text-right">Monto Total</th>}
+                    <th className="px-6 py-4 text-right">Acciones</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-surface-container">
@@ -334,6 +421,8 @@ const Docentes = () => {
                   ) : (
                     clasesMensuales.map((clase) => {
                       const docente = docentes.find(d => d.id === clase.docente_id);
+                      const docenteAsociado = docentes.find(d => d.user_id === currentUser?.id);
+                      const canManage = isAdmin || (userRole === 'docente' && docenteAsociado && clase.docente_id === docenteAsociado.id);
                       return (
                         <tr key={clase.id} className="hover:bg-cream/50 transition-colors group">
                           <td className="px-6 py-4">
@@ -351,6 +440,26 @@ const Docentes = () => {
                               <p className="text-[9px] text-on-surface-variant">({clase.cantidad_clases} x $ {clase.tarifa_hora.toLocaleString()})</p>
                             </td>
                           )}
+                          <td className="px-6 py-4 text-right">
+                            {canManage && (
+                              <div className="flex justify-end gap-1">
+                                <button 
+                                  onClick={() => handleStartEdit(clase)}
+                                  className="p-1 hover:bg-gold/10 rounded text-gold transition-all"
+                                  title="Editar clase"
+                                >
+                                  <Edit2 className="w-3.5 h-3.5" />
+                                </button>
+                                <button 
+                                  onClick={() => handleDeleteClase(clase.id)}
+                                  className="p-1 hover:bg-burgundy/10 rounded text-burgundy transition-all"
+                                  title="Eliminar clase"
+                                >
+                                  <Trash2 className="w-3.5 h-3.5" />
+                                </button>
+                              </div>
+                            )}
+                          </td>
                         </tr>
                       );
                     })

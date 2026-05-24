@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import Alumnas from './pages/Alumnas';
+import Pagos from './pages/Pagos';
 import Docentes from './pages/Docentes';
 import Alquileres from './pages/Alquileres';
 import Talleres from './pages/Talleres';
@@ -21,6 +22,7 @@ function App() {
         <Route element={<Layout />}>
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/alumnas" element={<Alumnas />} />
+          <Route path="/pagos" element={<Pagos />} />
           <Route path="/docentes" element={<Docentes />} />
           <Route path="/alquileres" element={<Alquileres />} />
           <Route path="/alquiler-sala" element={<Navigate to="/alquileres" replace />} />

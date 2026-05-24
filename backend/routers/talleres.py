@@ -36,6 +36,7 @@ def create_taller(
         mes=taller_in.mes,
         anio=taller_in.anio,
         pago_facilitador_realizado=taller_in.pago_facilitador_realizado,
+        pagado=taller_in.pagado,
         ganancia_estudio=ganancia
     )
     db.add(new_taller)
@@ -54,6 +55,21 @@ def toggle_pago_facilitador(
         raise HTTPException(status_code=404, detail="Taller no encontrado")
     
     taller.pago_facilitador_realizado = not taller.pago_facilitador_realizado
+    db.commit()
+    db.refresh(taller)
+    return taller
+
+@router.put("/{id}/pagar", response_model=schemas.TallerOut)
+def toggle_pago_taller(
+    id: int,
+    db: Session = Depends(database.get_db),
+    current_user: models.User = Depends(auth.check_role([models.UserRole.ADMIN]))
+):
+    taller = db.query(models.Taller).filter(models.Taller.id == id).first()
+    if not taller:
+        raise HTTPException(status_code=404, detail="Taller no encontrado")
+    
+    taller.pagado = not taller.pagado
     db.commit()
     db.refresh(taller)
     return taller

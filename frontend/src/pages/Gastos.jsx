@@ -161,16 +161,6 @@ const Gastos = () => {
                 </div>
               </div>
 
-              <div className="space-y-1">
-                <label className="text-[10px] font-bold text-secondary uppercase tracking-widest">Nro Comprobante / Ticket</label>
-                <input 
-                  type="text"
-                  className="input-elegant w-full"
-                  placeholder="Opcional"
-                  value={form.ticket}
-                  onChange={(e) => setForm({...form, ticket: e.target.value})}
-                />
-              </div>
 
               <div className="space-y-1">
                 <label className="text-[10px] font-bold text-secondary uppercase tracking-widest">Fecha de Pago</label>
@@ -218,16 +208,15 @@ const Gastos = () => {
                   <tr className="text-[10px] uppercase tracking-widest font-bold text-on-surface-variant border-b border-gold/10 bg-surface-container-low">
                     <th className="px-6 py-4">Categoría / Fecha</th>
                     <th className="px-6 py-4">Descripción</th>
-                    <th className="px-6 py-4">Ticket</th>
                     <th className="px-6 py-4 text-right">Monto</th>
                     <th className="px-6 py-4 text-right">Acción</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gold/5">
                   {loading ? (
-                    <tr><td colSpan="5" className="px-6 py-12 text-center italic opacity-50">Cargando...</td></tr>
+                    <tr><td colSpan="4" className="px-6 py-12 text-center italic opacity-50">Cargando...</td></tr>
                   ) : gastos.length === 0 ? (
-                    <tr><td colSpan="5" className="px-6 py-12 text-center italic opacity-50">No hay gastos registrados este mes.</td></tr>
+                    <tr><td colSpan="4" className="px-6 py-12 text-center italic opacity-50">No hay gastos registrados este mes.</td></tr>
                   ) : (
                     gastos.map((g) => (
                       <tr key={g.id} className="hover:bg-cream/20 transition-colors">
@@ -240,9 +229,6 @@ const Gastos = () => {
                         </td>
                         <td className="px-6 py-4 text-xs italic">
                           {g.descripcion}
-                        </td>
-                        <td className="px-6 py-4 text-xs font-mono opacity-60">
-                          {g.ticket || '-'}
                         </td>
                         <td className="px-6 py-4 text-right font-bold text-burgundy">
                           $ {g.monto.toLocaleString()}

@@ -54,6 +54,24 @@ const docentesService = {
       headers: { Authorization: `Bearer ${token}` }
     });
     return response.data;
+  },
+
+  // Actualizar horas de clase
+  updateClase: async (id, claseData) => {
+    const token = authService.getToken();
+    const response = await axios.put(`${API_URL}/clases/${id}`, claseData, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+    return response.data;
+  },
+
+  // Eliminar horas de clase
+  deleteClase: async (id) => {
+    const token = authService.getToken();
+    const response = await axios.delete(`${API_URL}/clases/${id}`, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+    return response.data;
   }
 };
 
