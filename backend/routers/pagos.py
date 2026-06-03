@@ -14,11 +14,12 @@ def get_pagos_mensuales(
     current_user: models.User = Depends(auth.check_role([models.UserRole.ADMIN]))
 ):
     try:
-        # 1. Obtener alumnas activas O inactivas con pago registrado en este período
+        # 1. Obtener alumnas activas O de prueba O inactivas con pago registrado en este período
         alumnas = db.query(models.Alumna).outerjoin(
             models.PagoAlumna, models.Alumna.id == models.PagoAlumna.alumna_id
         ).filter(
             (models.Alumna.activo == True) |
+            (models.Alumna.es_clase_prueba == True) |
             ((models.PagoAlumna.mes == mes) & (models.PagoAlumna.anio == anio) & (models.PagoAlumna.pagado == True))
         ).distinct().order_by(
             models.Alumna.nombre.asc(), models.Alumna.apellido.asc()
