@@ -18,7 +18,6 @@ app.add_middleware(
 app.include_router(auth_router.router)
 app.include_router(alumnas.router)
 app.include_router(docentes.router)
-app.include_router(operaciones.router)
 app.include_router(configuraciones.router)
 app.include_router(alquileres.router)
 app.include_router(talleres.router)

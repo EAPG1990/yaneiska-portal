@@ -59,19 +59,44 @@ const Gastos = () => {
     }
   };
 
+  const formatFecha = (fechaStr) => {
+    if (!fechaStr) return '';
+    const parts = fechaStr.split('-');
+    if (parts.length === 3) {
+      return `${parseInt(parts[2], 10)}/${parseInt(parts[1], 10)}/${parts[0]}`;
+    }
+    return new Date(fechaStr).toLocaleDateString();
+  };
+
   const handleCreate = async (e) => {
     e.preventDefault();
     const cleanNum = (val) => parseFloat(val.toString().replace(/\./g, '').replace(',', '.')) || 0;
     
+    let mesGasto = selectedMes;
+    let anioGasto = selectedAnio;
+    if (form.fecha) {
+      const parts = form.fecha.split('-');
+      if (parts.length === 3) {
+        anioGasto = parseInt(parts[0], 10);
+        mesGasto = parseInt(parts[1], 10);
+      }
+    }
+
     try {
       await gastosService.create({
         ...form,
-        mes: selectedMes,
-        anio: selectedAnio,
+        mes: mesGasto,
+        anio: anioGasto,
         monto: cleanNum(form.monto)
       });
       setForm({ ...form, descripcion: '', monto: '', ticket: '' });
-      fetchGastos();
+      
+      if (mesGasto !== selectedMes || anioGasto !== selectedAnio) {
+        setSelectedMes(mesGasto);
+        setSelectedAnio(anioGasto);
+      } else {
+        fetchGastos();
+      }
     } catch (error) {
       alert('Error al registrar gasto');
     }
@@ -225,7 +250,7 @@ const Gastos = () => {
                             <Tag className="w-3 h-3 text-gold" />
                             <span className="font-bold text-primary">{g.categoria}</span>
                           </div>
-                          <p className="text-[10px] opacity-60 mt-1">{new Date(g.fecha).toLocaleDateString()}</p>
+                          <p className="text-[10px] opacity-60 mt-1">{formatFecha(g.fecha)}</p>
                         </td>
                         <td className="px-6 py-4 text-xs italic">
                           {g.descripcion}

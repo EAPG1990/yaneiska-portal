@@ -22,7 +22,12 @@ def create_gasto(
     db: Session = Depends(database.get_db),
     current_user: models.User = Depends(auth.check_role([models.UserRole.ADMIN]))
 ):
-    new_gasto = models.Gasto(**gasto.dict())
+    gasto_data = gasto.dict()
+    if gasto.fecha:
+        gasto_data["mes"] = gasto.fecha.month
+        gasto_data["anio"] = gasto.fecha.year
+
+    new_gasto = models.Gasto(**gasto_data)
     db.add(new_gasto)
     db.commit()
     db.refresh(new_gasto)
