@@ -25,8 +25,13 @@ def create_alquiler(
     # Calcular total
     total = alquiler.horas * alquiler.tarifa_aplicada
     
+    alquiler_data = alquiler.dict()
+    if alquiler.fecha:
+        alquiler_data["mes"] = alquiler.fecha.month
+        alquiler_data["anio"] = alquiler.fecha.year
+
     new_alquiler = models.AlquilerSala(
-        **alquiler.dict(),
+        **alquiler_data,
         total=total
     )
     db.add(new_alquiler)

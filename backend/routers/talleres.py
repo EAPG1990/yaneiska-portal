@@ -27,14 +27,17 @@ def create_taller(
     payment = float(taller_in.pago_facilitador)
     ganancia = income - payment
     
+    mes = taller_in.fecha.month if taller_in.fecha else taller_in.mes
+    anio = taller_in.fecha.year if taller_in.fecha else taller_in.anio
+
     new_taller = models.Taller(
         nombre=taller_in.nombre,
         facilitador=taller_in.facilitador,
         fecha=taller_in.fecha,
         total_ingreso=income,
         pago_facilitador=payment,
-        mes=taller_in.mes,
-        anio=taller_in.anio,
+        mes=mes,
+        anio=anio,
         pago_facilitador_realizado=taller_in.pago_facilitador_realizado,
         pagado=taller_in.pagado,
         ganancia_estudio=ganancia
